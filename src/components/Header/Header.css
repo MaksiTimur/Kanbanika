@@ -1,0 +1,31 @@
+header {
+    background: #1a1c22;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 16px 40px
+}
+
+header .logo {
+    width: fit-content;
+    font-weight: 600;
+    font-size: 20px;
+    color: inherit;
+}
+
+header .logo:hover {
+    color: #eef1f5;
+}
+
+header .icon,
+header .icon-link {
+    width: 24px;
+    height: 24px;
+}
+
+header .icon:hover {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
