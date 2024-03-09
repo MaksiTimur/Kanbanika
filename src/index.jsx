@@ -8,6 +8,11 @@ import {
 	RouterProvider,
 } from "react-router-dom";
 import ErrorPage from './error-page';
+import Root from './routes/root';
+import Overview from './routes/overview';
+import Board, {
+	loader as boardLoader
+} from './routes/board';
 const rootContainer = document.querySelector('#root');
 
 if (rootContainer === null) throw new Error('Can\'t find root container');
@@ -17,14 +22,17 @@ const router = createBrowserRouter([
 		path: "/",
 		element: <Root />,
 		errorElement: <ErrorPage />,
-		loader: rootLoader,
-		action: rootAction,
 		children: [
 			{
-				path: "boards/:contactId",
+				path: "boards",
+				element: <Overview />,
+			},
+			{
+				path: "boards/:boardId",
 				element: <Board />,
-				loader: contactLoader
-			}
+				loader: boardLoader,
+			},
+
 		]
 	}
 ]);
