@@ -1,0 +1,21 @@
+.board-card {
+    background: #242732;
+    padding: 16px;
+    position: relative;
+    border-radius: 8px;
+}
+
+.board-card:hover {
+    position: relative;
+    top: -2px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+}
+
+.board-title {
+    top: 0;
+    left: 0;
+    /* position: absolute; */
+}
