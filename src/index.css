@@ -34,6 +34,21 @@ a:hover {
   color: #e9edf8;
 }
 
+button {
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 0 0 8px 0;
+}
+
 #error-page {
   display: flex;
   flex-direction: column;
