@@ -6,6 +6,11 @@
     overflow-y: hidden;
 }
 
+#create-column {
+    margin-top: 28px;
+    height: fit-content;
+}
+
 #create-column svg {
     width: 24px;
     height: 24px;
