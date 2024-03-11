@@ -1,0 +1,23 @@
+.tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 70vh;
+    overflow: auto;
+    scrollbar-width: none;
+    overflow-x: hidden;
+}
+
+#create-task {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#create-task svg {
+    height: 22px;
+    width: 22px;
+}
