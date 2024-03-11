@@ -1,6 +1,8 @@
-const Board = () => {
+import Columns from "./Columns/Columns";
+
+const Board = ({ data }) => {
     return (
-        <div>Board</div>
+        <Columns data={data} />
     )
 }
 
