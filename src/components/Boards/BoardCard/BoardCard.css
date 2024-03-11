@@ -3,6 +3,7 @@
     padding: 16px;
     position: relative;
     border-radius: 8px;
+    height: fit-content;
 }
 
 .board-card:hover {
@@ -15,6 +16,7 @@
 }
 
 .board-title {
+    margin: 0;
     top: 0;
     left: 0;
 }
