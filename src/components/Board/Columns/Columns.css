@@ -1,0 +1,12 @@
+.columns {
+    display: flex;
+    gap: 16px;
+    overflow: auto;
+    height: fit-content;
+    overflow-y: hidden;
+}
+
+#create-column svg {
+    width: 24px;
+    height: 24px;
+}
