@@ -5,7 +5,7 @@ const Column = ({ data }) => {
     return (
         <div className='column'>
             <h2>{data.title}</h2>
-            <Tasks />
+            <Tasks data={data} />
         </div>
     )
 }
