@@ -42,11 +42,18 @@ button {
 
 button:hover {
   cursor: pointer;
+  color: #e9edf8;
 }
 
 h2 {
   font-size: 20px;
   margin: 0 0 8px 0;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
 }
 
 #error-page {
