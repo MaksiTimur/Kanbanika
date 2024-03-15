@@ -10,12 +10,17 @@ export const boardsSlice = createSlice({
 			state.push(newBoard);
 
 			localStorage.setItem('boards', JSON.stringify(current(state)));
+		},
+		setTitle: (state, action) => {
+			state[0].title = action.payload;
+			localStorage.setItem('boards', JSON.stringify(current(state)));
 		}
 	}
 });
 
 export const {
-	create
+	create,
+	setTitle
 } = boardsSlice.actions;
 
 export default boardsSlice.reducer;
