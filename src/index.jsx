@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import {
 	createBrowserRouter,
+	redirect,
 	RouterProvider,
 } from "react-router-dom";
 import ErrorPage from './error-page';
@@ -18,6 +19,10 @@ const rootContainer = document.querySelector('#root');
 if (rootContainer === null) throw new Error('Can\'t find root container');
 
 const router = createBrowserRouter([
+	{
+		path: "/",
+		loader: () => redirect('/boards'),
+	},
 	{
 		path: "/",
 		element: <Root />,
