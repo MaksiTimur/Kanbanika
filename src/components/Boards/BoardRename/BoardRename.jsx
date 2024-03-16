@@ -14,7 +14,7 @@ const BoardRename = ({ closeOnSubmit, title }) => {
 
             const value = e.target.title.value;
 
-            if (value.length === 0) return; 
+            if (value.length === 0) return;
 
             dispatch(setTitle({ value: value, id: board.id }));
             closeOnSubmit();

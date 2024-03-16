@@ -11,18 +11,18 @@ const Boards = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const clickHandler = (id) => {
+    const handleClick = (id) => {
         navigate(`${id}`);
-    }
+    };
 
     boardsData.forEach(boardData => {
         boards.push(
             <BoardCard
                 data={boardData}
                 key={boardData.id}
-                clickHandler={id => clickHandler(id)}
+                onClick={id => handleClick(id)}
             />
-        )
+        );
     });
 
     return (
@@ -31,7 +31,7 @@ const Boards = () => {
             <BoardCard
                 data={{ title: <FaCirclePlus />, id: 'create-board' }}
                 key='create-board'
-                clickHandler={() => dispatch(create({ title: 'New Board' }))}
+                onClick={() => dispatch(create({ title: 'New Board' }))}
             />
         </div>
     )

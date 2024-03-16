@@ -1,11 +1,14 @@
 import './BoardCard.css';
+import { useDispatch } from 'react-redux';
 
-const Board = ({ data, clickHandler }) => {
+const BoardCard = ({ data, onClick }) => {
+    const dispatch = useDispatch();
+
     return (
-        <div className="board-card" id={data.id} onClick={() => clickHandler(data.id)}>
-            <h2 className="board-card-title">{data.title}</h2>
+        <div className="board-card" id={data.id} onClick={() => onClick(data.id)}>
+            <h2 className="title">{data.title}</h2>
         </div>
     )
 }
 
-export default Board;
+export default BoardCard;

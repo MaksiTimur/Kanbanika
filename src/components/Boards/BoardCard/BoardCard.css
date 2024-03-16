@@ -15,18 +15,18 @@
     cursor: pointer;
 }
 
-.board-card-title {
+.board-card .title {
     margin: 0;
     top: 0;
     left: 0;
 }
 
-#create-board .board-card-title {
+#create-board .title {
     display: flex;
     justify-content: center;
 }
 
-#create-board .board-card-title svg {
+#create-board .title svg {
     height: auto;
     width: 30px;
 }
