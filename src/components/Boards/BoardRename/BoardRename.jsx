@@ -12,7 +12,7 @@ const BoardRename = ({ closeOnSubmit, title }) => {
         boards.forEach(board => {
             if (board.id !== boardId) return;
 
-            dispatch(setTitle(e.target.title.value));
+            dispatch(setTitle({ value: e.target.title.value, id: board.id }));
             closeOnSubmit()
         });
     }

@@ -12,7 +12,10 @@ export const boardsSlice = createSlice({
 			localStorage.setItem('boards', JSON.stringify(current(state)));
 		},
 		setTitle: (state, action) => {
-			state[0].title = action.payload;
+			const board = state.find(board => board.id === action.payload.id)
+
+			board.title = action.payload.value;
+			
 			localStorage.setItem('boards', JSON.stringify(current(state)));
 		}
 	}
