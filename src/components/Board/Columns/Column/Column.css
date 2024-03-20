@@ -5,3 +5,30 @@
     height: fit-content;
     width: 250px;
 }
+
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.column-header h2 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.column-header button {
+    margin-top: 2px;
+}
+
+.column-header svg {
+    height: auto;
+    width: 16px;
+}
+
+.column-header:hover {
+    cursor: grab;
+}
