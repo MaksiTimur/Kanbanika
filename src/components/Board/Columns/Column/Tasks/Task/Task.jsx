@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './Task.css';
-import { setCurrentCard } from '../../../../../../redux/slices/dragSlice';
+import { setCurrentTask } from '../../../../../../redux/slices/currentSlice';
 import { insertAfter } from '../../../../../../redux/slices/tasksSlice';
 
 const Task = ({ data }) => {
-    const dragData = useSelector(state => state.dragReducer);
+    const currentData = useSelector(state => state.currentReducer);
     const dispatch = useDispatch();
 
-    const hadleDragStart = (e, task) => {
-        dispatch(setCurrentCard(task));
+    const handleDragStart = (e, task) => {
+        dispatch(setCurrentTask(task));
     }
 
     const handleDrop = (e, task) => {
@@ -18,7 +18,7 @@ const Task = ({ data }) => {
             box-shadow: none;
         `;
 
-        const droppedTask = dragData.currentTask;
+        const droppedTask = currentData.currentTask;
 
         if (droppedTask.id === task.id) return;
 
@@ -31,7 +31,7 @@ const Task = ({ data }) => {
         `;
     }
 
-    const hadleDragOver = e => {
+    const handleDragOver = e => {
         e.preventDefault();
         e.target.style = `
             box-shadow: 0 4px #1a1c22;
@@ -48,9 +48,9 @@ const Task = ({ data }) => {
         <h3
             className='task'
             draggable
-            onDrag={e => hadleDragStart(e, data)}
+            onDrag={e => handleDragStart(e, data)}
             onDragEnd={e => handleDragEnd(e)}
-            onDragOver={e => hadleDragOver(e)}
+            onDragOver={e => handleDragOver(e)}
             onDragLeave={e => handleDragLeave(e)}
             onDrop={e => handleDrop(e, data)}
         >

@@ -5,12 +5,17 @@ import { show } from "../redux/slices/modalSlice";
 import Modal from "../components/Modal/Modal";
 import { FaPencil } from "react-icons/fa6";
 import BoardRename from "../components/Boards/BoardRename/BoardRename";
+import { useEffect } from "react";
 
 export async function loader({ params }) {
     return params.boardId;
 }
 
 const Board = () => {
+    useEffect(() => {
+        dispatch(show(false));
+    }, []);
+
     const boardsData = useSelector(state => state.boardsReducer);
     const id = useLoaderData();
     const dispatch = useDispatch();
@@ -28,9 +33,9 @@ const Board = () => {
                 <button onClick={() => dispatch(show(true))}>
                     <FaPencil />
                 </button>
-            </h1>
+            </h1 >
             <BoardComponent data={board} />
-            <Modal><BoardRename closeOnSubmit={() => dispatch(show(false))} title={board.title} /></Modal>
+            <Modal><BoardRename title={board.title} /></Modal>
         </>
     );
 }

@@ -2,8 +2,9 @@ import { Form, useLoaderData } from 'react-router-dom';
 import './BoardRename.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../../../redux/slices/boardsSlice';
+import { show } from '../../../redux/slices/modalSlice';
 
-const BoardRename = ({ closeOnSubmit, title }) => {
+const BoardRename = ({ title }) => {
     const boards = useSelector(state => state.boardsReducer);
     const boardId = useLoaderData();
     const dispatch = useDispatch();
@@ -16,8 +17,8 @@ const BoardRename = ({ closeOnSubmit, title }) => {
 
             if (value.length === 0) return;
 
-            dispatch(setTitle({ value: value, id: board.id }));
-            closeOnSubmit();
+            dispatch(setTitle({ value, id: board.id }));
+            dispatch(show(false));
         });
     }
 
