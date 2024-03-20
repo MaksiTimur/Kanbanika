@@ -4,15 +4,15 @@ import Tasks from './Tasks/Tasks';
 import { setColumn } from '../../../../redux/slices/tasksSlice';
 import { FaPencil } from "react-icons/fa6";
 import { show } from '../../../../redux/slices/modalSlice';
-import { setCurrentColumn } from '../../../../redux/slices/currentSlice';
 import { useEffect } from 'react';
+import { setCurrent } from '../../../../redux/slices/columnsSlice';
 
 const Column = ({ data }) => {
     useEffect(() => {
         dispatch(show(false));
     }, []);
 
-    const currentData = useSelector(state => state.currentReducer);
+    const task = useSelector(state => state.tasksReducer).current;
     const dispatch = useDispatch();
 
     const handleDragOver = e => {
@@ -30,7 +30,6 @@ const Column = ({ data }) => {
     }
 
     const handleCardDrop = (e, column) => {
-        const task = currentData.currentTask;
         const columnId = column.id;
 
         dispatch(setColumn({ task, columnId }));
@@ -63,7 +62,7 @@ const Column = ({ data }) => {
             <div className="column-header">
                 <h2>{data.title}</h2>
                 <button onClick={() => {
-                    dispatch(setCurrentColumn(data));
+                    dispatch(setCurrent(data));
                     dispatch(show(true));
                 }}>
                     <FaPencil />

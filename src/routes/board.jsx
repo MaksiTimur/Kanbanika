@@ -16,7 +16,7 @@ const Board = () => {
         dispatch(show(false));
     }, []);
 
-    const boardsData = useSelector(state => state.boardsReducer);
+    const boardsData = useSelector(state => state.boardsReducer).boards;
     const id = useLoaderData();
     const dispatch = useDispatch();
     let board = null;

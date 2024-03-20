@@ -1,17 +1,17 @@
-import { Form, useLoaderData } from 'react-router-dom';
+import { Form } from 'react-router-dom';
 import './ColumnRename.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../../../../../redux/slices/columnsSlice';
 import { show } from '../../../../../redux/slices/modalSlice';
 
 const ColumnRename = ({ title }) => {
-    const columns = useSelector(state => state.columnsReducer);
-    const currectColumn = useSelector(state => state.currentReducer).currentColumn;
+    const columns = useSelector(state => state.columnsReducer).columns;
+    const currentColumn = useSelector(state => state.columnsReducer).current;
     const dispatch = useDispatch();
 
     const handleSubmit = e => {
         columns.forEach(column => {
-            if (column.id !== currectColumn.id) return;
+            if (column.id !== currentColumn.id) return;
 
             const value = e.target.title.value;
 
@@ -23,8 +23,7 @@ const ColumnRename = ({ title }) => {
     }
 
     if (!title) {
-        const currentData = useSelector(state => state.currentReducer);
-        const currentColumn = currentData.currentColumn;
+        const currentColumn = useSelector(state => state.columnsReducer).current;
 
         const column = columns.find(column => column.id === currentColumn.id);
         title = column.title;

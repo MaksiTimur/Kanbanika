@@ -6,7 +6,7 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { create } from '../../redux/slices/boardsSlice';
 
 const Boards = () => {
-    const boardsData = useSelector(state => state.boardsReducer);
+    const boardsData = useSelector(state => state.boardsReducer).boards;
     const boards = Array(boardsData.length);
     const navigate = useNavigate();
     const dispatch = useDispatch();

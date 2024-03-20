@@ -7,7 +7,7 @@ import Modal from '../../Modal/Modal';
 import ColumnRename from './Column/ColumnRename/ColumnRename';
 
 const Columns = ({ data }) => {
-    const columnsData = useSelector(state => state.columnsReducer);
+    const columnsData = useSelector(state => state.columnsReducer).columns;
     const columns = Array(columnsData.length);
     const dispatch = useDispatch();
 

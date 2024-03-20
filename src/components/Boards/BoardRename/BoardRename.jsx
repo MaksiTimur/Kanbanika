@@ -5,7 +5,7 @@ import { setTitle } from '../../../redux/slices/boardsSlice';
 import { show } from '../../../redux/slices/modalSlice';
 
 const BoardRename = ({ title }) => {
-    const boards = useSelector(state => state.boardsReducer);
+    const boards = useSelector(state => state.boardsReducer).boards;
     const boardId = useLoaderData();
     const dispatch = useDispatch();
 

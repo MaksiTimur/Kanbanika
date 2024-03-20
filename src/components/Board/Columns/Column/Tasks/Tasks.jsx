@@ -5,7 +5,7 @@ import { create } from '../../../../../redux/slices/tasksSlice';
 import './Tasks.css'
 
 const Tasks = ({ data }) => {
-    const tasksData = useSelector(state => state.tasksReducer);
+    const tasksData = useSelector(state => state.tasksReducer).tasks;
     const tasks = Array(tasksData.length);
     const dispatch = useDispatch();
 
