@@ -1,0 +1,11 @@
+.column-rename {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.column-rename button {
+    padding: 8px;
+    border-radius: 4px;
+    background: #1f2229;
+}
