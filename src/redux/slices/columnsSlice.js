@@ -10,12 +10,20 @@ export const columnsSlice = createSlice({
 			state.push(newColumn);
 
 			localStorage.setItem('columns', JSON.stringify(current(state)));
+		},
+		setTitle: (state, action) => {
+			const column = state.find(column => column.id === action.payload.id)
+
+			column.title = action.payload.value;
+
+			localStorage.setItem('columns', JSON.stringify(current(state)));
 		}
 	}
 });
 
 export const {
-	create
+	create,
+	setTitle
 } = columnsSlice.actions;
 
 export default columnsSlice.reducer;

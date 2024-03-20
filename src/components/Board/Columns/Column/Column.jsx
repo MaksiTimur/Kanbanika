@@ -2,9 +2,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Column.css';
 import Tasks from './Tasks/Tasks';
 import { setColumn } from '../../../../redux/slices/tasksSlice';
+import { FaPencil } from "react-icons/fa6";
+import { show } from '../../../../redux/slices/modalSlice';
+import { setCurrentColumn } from '../../../../redux/slices/currentSlice';
+import { useEffect } from 'react';
 
 const Column = ({ data }) => {
-    const dragData = useSelector(state => state.dragReducer);
+    useEffect(() => {
+        dispatch(show(false));
+    }, []);
+
+    const currentData = useSelector(state => state.currentReducer);
     const dispatch = useDispatch();
 
     const handleDragOver = e => {
@@ -22,7 +30,7 @@ const Column = ({ data }) => {
     }
 
     const handleCardDrop = (e, column) => {
-        const task = dragData.currentTask;
+        const task = currentData.currentTask;
         const columnId = column.id;
 
         dispatch(setColumn({ task, columnId }));
@@ -52,9 +60,17 @@ const Column = ({ data }) => {
             onDragLeave={e => handleDragLeave(e)}
             onDragEnd={e => handleDragEnd(e)}
         >
-            <h2>{data.title}</h2>
+            <div className="column-header">
+                <h2>{data.title}</h2>
+                <button onClick={() => {
+                    dispatch(setCurrentColumn(data));
+                    dispatch(show(true));
+                }}>
+                    <FaPencil />
+                </button>
+            </div>
             <Tasks data={data} />
-        </div>
+        </div >
     )
 }
 
