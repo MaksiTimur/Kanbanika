@@ -8,8 +8,12 @@
     overflow-x: hidden;
 }
 
+.tasks .task:last-child {
+    margin-bottom: 4px;
+}
+
 #create-task {
-    margin-top: 8px;
+    margin-top: 4px;
     display: flex;
     justify-content: center;
     width: fit-content;
