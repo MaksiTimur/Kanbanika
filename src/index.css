@@ -73,7 +73,31 @@ input {
   height: 100vh;
 }
 
-#error-page h1,
+#error-page h1 {
+  margin: 2px;
+}
+
 #error-page p {
-  margin: 0;
+  margin: 1px;
+}
+
+#error-page .error-text {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#error-page .error-text i {
+  text-transform: capitalize;
+}
+
+#error-page button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 8px;
+  background: #1a1c22;
+  font-size: 16px;
 }

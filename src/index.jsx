@@ -22,6 +22,7 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		loader: () => redirect('/boards'),
+		errorElement: <ErrorPage />,
 	},
 	{
 		path: "/",
