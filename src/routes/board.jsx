@@ -6,6 +6,7 @@ import Modal from "../components/Modal/Modal";
 import { FaPencil } from "react-icons/fa6";
 import BoardRename from "../components/Boards/BoardRename/BoardRename";
 import { useEffect } from "react";
+import DeletionZone from "../components/DeletionZone/DeletionZone";
 
 export async function loader({ params }) {
     return params.boardId;
@@ -35,6 +36,7 @@ const Board = () => {
                 </button>
             </h1 >
             <BoardComponent data={board} />
+            <DeletionZone />
             <Modal><BoardRename title={board.title} /></Modal>
         </>
     );
