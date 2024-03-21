@@ -6,13 +6,14 @@ import { FaPencil } from "react-icons/fa6";
 import { show } from '../../../../redux/slices/modalSlice';
 import { useEffect } from 'react';
 import { setCurrent } from '../../../../redux/slices/columnsSlice';
+import { setDragging } from '../../../../redux/slices/dragSlice';
 
 const Column = ({ data }) => {
     useEffect(() => {
         dispatch(show(false));
     }, []);
 
-    const task = useSelector(state => state.tasksReducer).current;
+    const task = useSelector(state => state.dragReducer).item;
     const dispatch = useDispatch();
 
     const handleDragOver = e => {
@@ -29,7 +30,7 @@ const Column = ({ data }) => {
         `;
     }
 
-    const handleCardDrop = (e, column) => {
+    const handleTaskDrop = (e, column) => {
         const columnId = column.id;
 
         dispatch(setColumn({ task, columnId }));
@@ -37,6 +38,8 @@ const Column = ({ data }) => {
         e.currentTarget.style = `
             box-shadow: none;
         `;
+
+        dispatch(setDragging(false));
     }
 
     const handleDragLeave = e => {
@@ -55,7 +58,7 @@ const Column = ({ data }) => {
         <div
             className='column'
             onDragOver={e => handleDragOver(e)}
-            onDrop={e => handleCardDrop(e, data)}
+            onDrop={e => handleTaskDrop(e, data)}
             onDragLeave={e => handleDragLeave(e)}
             onDragEnd={e => handleDragEnd(e)}
         >

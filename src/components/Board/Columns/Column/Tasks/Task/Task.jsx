@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './Task.css';
-import { insertAfter, setCurrent } from '../../../../../../redux/slices/tasksSlice';
+import { insertAfter } from '../../../../../../redux/slices/tasksSlice';
+import { setDraggable, setDragging } from '../../../../../../redux/slices/dragSlice';
 
 const Task = ({ data }) => {
     const droppedTask = useSelector(state => state.tasksReducer).current;
     const dispatch = useDispatch();
 
     const handleDragStart = (e, task) => {
-        dispatch(setCurrent(task));
+        dispatch(setDragging(true));
+        dispatch(setDraggable(task));
     }
 
     const handleDrop = (e, task) => {
@@ -20,12 +22,15 @@ const Task = ({ data }) => {
         if (droppedTask.id === task.id) return;
 
         dispatch(insertAfter({ droppedTask, task }));
+        dispatch(setDragging(false));
     }
 
     const handleDragEnd = (e) => {
         e.target.style = `
             box-shadow: none;
         `;
+
+        dispatch(setDragging(false));
     }
 
     const handleDragOver = e => {
