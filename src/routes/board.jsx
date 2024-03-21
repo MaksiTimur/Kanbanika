@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import BoardComponent from "../components/Board/Board";
 import { useLoaderData } from "react-router-dom";
-import { show } from "../redux/slices/modalSlice";
+import { resetShow, setShow } from "../redux/slices/modalSlice";
 import Modal from "../components/Modal/Modal";
 import { FaPencil } from "react-icons/fa6";
 import BoardRename from "../components/Boards/BoardRename/BoardRename";
@@ -14,13 +14,14 @@ export async function loader({ params }) {
 
 const Board = () => {
     useEffect(() => {
-        dispatch(show(false));
+        dispatch(resetShow());
     }, []);
 
     const boardsData = useSelector(state => state.boardsReducer).boards;
     const id = useLoaderData();
     const dispatch = useDispatch();
     let board = null;
+    const showModal = useSelector(state => state.modalReducer).boardRename;
 
     boardsData.forEach(boardData => {
         if (boardData.id != id) return;
@@ -30,14 +31,17 @@ const Board = () => {
 
     return (
         <>
-            <h1 className="board-title">Board {board.title}
-                <button onClick={() => dispatch(show(true))}>
+            <div className="board-title">
+                <h1>
+                    Board {board.title}
+                </h1 >
+                <button onClick={() => dispatch(setShow({ boardRename: true }))}>
                     <FaPencil />
                 </button>
-            </h1 >
+            </div>
             <BoardComponent data={board} />
             <DeletionZone />
-            <Modal><BoardRename title={board.title} /></Modal>
+            {showModal && <Modal onClose={() => dispatch({ boardRename: false })}><BoardRename title={board.title} /></Modal>}
         </>
     );
 }

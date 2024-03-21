@@ -3,14 +3,14 @@ import './Column.css';
 import Tasks from './Tasks/Tasks';
 import { setColumn } from '../../../../redux/slices/tasksSlice';
 import { FaPencil } from "react-icons/fa6";
-import { show } from '../../../../redux/slices/modalSlice';
+import { resetShow, setShow } from '../../../../redux/slices/modalSlice';
 import { useEffect } from 'react';
 import { setCurrent } from '../../../../redux/slices/columnsSlice';
 import { setDragging } from '../../../../redux/slices/dragSlice';
 
 const Column = ({ data }) => {
     useEffect(() => {
-        dispatch(show(false));
+        dispatch(resetShow());
     }, []);
 
     const task = useSelector(state => state.dragReducer).item;
@@ -66,7 +66,7 @@ const Column = ({ data }) => {
                 <h2>{data.title}</h2>
                 <button onClick={() => {
                     dispatch(setCurrent(data));
-                    dispatch(show(true));
+                    dispatch(setShow({ columnRename: true }));
                 }}>
                     <FaPencil />
                 </button>

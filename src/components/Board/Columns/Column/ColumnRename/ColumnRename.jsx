@@ -2,7 +2,7 @@ import { Form } from 'react-router-dom';
 import './ColumnRename.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../../../../../redux/slices/columnsSlice';
-import { show } from '../../../../../redux/slices/modalSlice';
+import { setShow } from '../../../../../redux/slices/modalSlice';
 
 const ColumnRename = ({ title }) => {
     const columns = useSelector(state => state.columnsReducer).columns;
@@ -18,7 +18,7 @@ const ColumnRename = ({ title }) => {
             if (value.length === 0) return;
 
             dispatch(setTitle({ value, id: column.id }));
-            dispatch(show(false));
+            dispatch(setShow({ columnRename: false }));
         });
     }
 

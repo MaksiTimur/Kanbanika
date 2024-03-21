@@ -5,11 +5,13 @@ import { create } from '../../../redux/slices/columnsSlice';
 import './Columns.css';
 import Modal from '../../Modal/Modal';
 import ColumnRename from './Column/ColumnRename/ColumnRename';
+import { setShow } from '../../../redux/slices/modalSlice';
 
 const Columns = ({ data }) => {
     const columnsData = useSelector(state => state.columnsReducer).columns;
     const columns = Array(columnsData.length);
     const dispatch = useDispatch();
+    const showModal = useSelector(state => state.modalReducer).columnRename;
 
     columnsData.forEach(columnData => {
         if (columnData.board !== data.id) return;
@@ -35,7 +37,7 @@ const Columns = ({ data }) => {
                     <FaCirclePlus />
                 </button>
             </div >
-            <Modal><ColumnRename /></Modal>
+            {showModal && <Modal onClose={() => dispatch(setShow({ columnRename: false }))}><ColumnRename /></Modal>}
         </>
     )
 }

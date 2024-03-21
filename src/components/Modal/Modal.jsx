@@ -1,25 +1,16 @@
 import { createPortal } from 'react-dom';
 import ModalContent from './ModalContent/ModalContent';
-import { useDispatch, useSelector } from 'react-redux';
-import { show } from '../../redux/slices/modalSlice'
 import './Modal.css';
 
 const modals = document.querySelector('#modals');
 
-const Modal = ({ children }) => {
-    const isNeedToShow = useSelector(state => state.modalReducer)
-    const dispatch = useDispatch();
-
-    const close = () => {
-        dispatch(show(false));
-    }
-
+const Modal = ({ children, onClose }) => {
     return (
         <>
-            {isNeedToShow && createPortal(
+            {createPortal(
                 <div className="modal-wrapper">
                     <div className="modal">
-                        <button className='modal-close' onClick={close}>X</button>
+                        <button className='modal-close' onClick={onClose}>X</button>
                         <ModalContent>
                             {children}
                         </ModalContent>
