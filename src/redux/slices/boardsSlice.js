@@ -17,26 +17,22 @@ export const boardsSlice = createSlice({
 		insertAfter: (state, action) => {
 			const { droppedBoard, board } = action.payload;
 
-			const droppedBoardInState = state.boards.find(stateBoard => stateBoard.id === droppedBoard.id);
-			const boardInState = state.boards.find(stateBoard => stateBoard.id === board.id);
-
-			const droppedIndex = state.boards.indexOf(droppedBoardInState);
-			const boardIndex = state.boards.indexOf(boardInState);
+			const droppedIndex = state.boards.findIndex(stateBoard => stateBoard.id === droppedBoard.id);
+			const boardIndex = state.boards.findIndex(stateBoard => stateBoard.id === board.id);
 
 			state.boards.splice(droppedIndex, 1);
 
 			if (droppedIndex > boardIndex) {
-				state.boards.splice(boardIndex + 1, 0, droppedBoardInState);
+				state.boards.splice(boardIndex + 1, 0, droppedBoard);
 			} else {
-				state.boards.splice(boardIndex, 0, droppedBoardInState)
+				state.boards.splice(boardIndex, 0, droppedBoard)
 			}
 
-			// localStorage.setItem('tasks', JSON.stringify(current(state)));
+			localStorage.setItem('boards', JSON.stringify(current(state)));
 		},
 		remove: (state, action) => {
 			const board = action.payload;
-			const boardInState = state.boards.find(stateBoard => stateBoard.id === board.id);
-			const boardIndex = state.boards.indexOf(boardInState);
+			const boardIndex = state.boards.findIndex(stateBoard => stateBoard.id === board.id);
 
 			state.boards.splice(boardIndex, 1);
 			localStorage.setItem('boards', JSON.stringify(current(state)));

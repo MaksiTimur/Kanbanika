@@ -16,8 +16,7 @@ export const columnsSlice = createSlice({
 		},
 		remove: (state, action) => {
 			const column = action.payload;
-			const columnInState = state.columns.find(stateColumn => stateColumn.id === column.id);
-			const columnIndex = state.columns.indexOf(columnInState);
+			const columnIndex = state.columns.findIndex(stateColumn => stateColumn.id === column.id);
 
 			state.columns.splice(columnIndex, 1);
 			localStorage.setItem('columns', JSON.stringify(current(state)));

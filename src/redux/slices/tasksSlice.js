@@ -21,30 +21,26 @@ export const tasksSlice = createSlice({
 		insertAfter: (state, action) => {
 			const { droppedTask, task } = action.payload;
 
-			const droppedTaskInState = state.tasks.find(stateTask => stateTask.id === droppedTask.id);
-			const taskInState = state.tasks.find(stateTask => stateTask.id === task.id);
-
-			droppedTaskInState.column = taskInState.column;
-
 			state.tasks.sort((a, b) => a.column.localeCompare(b.column));
 
-			const droppedIndex = state.tasks.indexOf(droppedTaskInState);
-			const taskIndex = state.tasks.indexOf(taskInState);
+			const droppedIndex = state.tasks.findIndex(stateTask => stateTask.id === droppedTask.id);
+			const taskIndex = state.tasks.findIndex(stateTask => stateTask.id === task.id);
+
+			state.tasks[droppedIndex].column = task.column;
 
 			state.tasks.splice(droppedIndex, 1);
 
 			if (droppedIndex > taskIndex) {
-				state.tasks.splice(taskIndex + 1, 0, droppedTaskInState);
+				state.tasks.splice(taskIndex + 1, 0, droppedTask);
 			} else {
-				state.tasks.splice(taskIndex, 0, droppedTaskInState)
+				state.tasks.splice(taskIndex, 0, droppedTask)
 			}
 
 			localStorage.setItem('tasks', JSON.stringify(current(state)));
 		},
 		remove: (state, action) => {
 			const task = action.payload;
-			const taskInState = state.tasks.find(stateTask => stateTask.id === task.id);
-			const taskIndex = state.tasks.indexOf(taskInState);
+			const taskIndex = state.tasks.findIndex(stateTask => stateTask.id === task.id);
 
 			state.tasks.splice(taskIndex, 1);
 			localStorage.setItem('tasks', JSON.stringify(current(state)));
