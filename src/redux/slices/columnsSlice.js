@@ -8,10 +8,18 @@ export const columnsSlice = createSlice({
 			state.current = action.payload;
 		},
 		create: (state, action) => {
-			const newColumn = { title: action.payload.title, id: self.crypto.randomUUID(), board: action.payload.board };
+			const newColumn = { type: "column", title: action.payload.title, id: self.crypto.randomUUID(), board: action.payload.board };
 
 			state.columns.push(newColumn);
 
+			localStorage.setItem('columns', JSON.stringify(current(state)));
+		},
+		remove: (state, action) => {
+			const column = action.payload;
+			const columnInState = state.columns.find(stateColumn => stateColumn.id === column.id);
+			const columnIndex = state.columns.indexOf(columnInState);
+
+			state.columns.splice(columnIndex, 1);
 			localStorage.setItem('columns', JSON.stringify(current(state)));
 		},
 		setTitle: (state, action) => {
@@ -27,6 +35,7 @@ export const columnsSlice = createSlice({
 export const {
 	setCurrent,
 	create,
+	remove,
 	setTitle
 } = columnsSlice.actions;
 

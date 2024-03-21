@@ -8,10 +8,18 @@ export const boardsSlice = createSlice({
 			state.current = action.payload;
 		},
 		create: (state, action) => {
-			const newBoard = { title: action.payload.title, id: self.crypto.randomUUID() };
+			const newBoard = { type: "board", title: action.payload.title, id: self.crypto.randomUUID() };
 
 			state.boards.push(newBoard);
 
+			localStorage.setItem('boards', JSON.stringify(current(state)));
+		},
+		remove: (state, action) => {
+			const board = action.payload;
+			const boardInState = state.boards.find(stateBoard => stateBoard.id === board.id);
+			const boardIndex = state.boards.indexOf(boardInState);
+
+			state.boards.splice(boardIndex, 1);
 			localStorage.setItem('boards', JSON.stringify(current(state)));
 		},
 		setTitle: (state, action) => {
@@ -27,6 +35,7 @@ export const boardsSlice = createSlice({
 export const {
 	setCurrent,
 	create,
+	remove,
 	setTitle
 } = boardsSlice.actions;
 

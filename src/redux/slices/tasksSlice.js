@@ -11,7 +11,7 @@ export const tasksSlice = createSlice({
 			state.current = action.payload;
 		},
 		create: (state, action) => {
-			const newTask = { title: action.payload.title, id: self.crypto.randomUUID(), column: action.payload.column };
+			const newTask = { type: "task", title: action.payload.title, id: self.crypto.randomUUID(), column: action.payload.column };
 
 			state.tasks.push(newTask);
 			state.tasks.sort((a, b) => a.column.localeCompare(b.column));
@@ -39,7 +39,14 @@ export const tasksSlice = createSlice({
 				state.tasks.splice(taskIndex, 0, droppedTaskInState)
 			}
 
-			state.tasks.sort((a, b) => a.column.localeCompare(b.column));
+			localStorage.setItem('tasks', JSON.stringify(current(state)));
+		},
+		remove: (state, action) => {
+			const task = action.payload;
+			const taskInState = state.tasks.find(stateTask => stateTask.id === task.id);
+			const taskIndex = state.tasks.indexOf(taskInState);
+
+			state.tasks.splice(taskIndex, 1);
 			localStorage.setItem('tasks', JSON.stringify(current(state)));
 		},
 		setColumn: (state, action) => {
@@ -56,6 +63,7 @@ export const {
 	setCurrent,
 	create,
 	insertAfter,
+	remove,
 	setColumn
 } = tasksSlice.actions;
 
