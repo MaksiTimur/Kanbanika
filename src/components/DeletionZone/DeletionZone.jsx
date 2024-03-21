@@ -17,12 +17,20 @@ const DeletionZone = () => {
         e.currentTarget.style = `
             background: rgba(255, 0, 0, .3);
         `;
+
+        e.currentTarget.firstChild.style = `
+            background: none;
+        `
     }
 
     const handleDrop = e => {
         e.currentTarget.style = `
             background: rgba(255, 0, 0, .25);
         `;
+
+        e.currentTarget.firstChild.style = `
+            background: none;
+        `
 
         const element = dragData.item;
         switch (element.type) {
@@ -43,9 +51,13 @@ const DeletionZone = () => {
     }
 
     const handleDragLeave = e => {
-        e.target.style = `
+        e.currentTarget.style = `
             background: rgba(255, 0, 0, .25);
         `;
+
+        e.currentTarget.firstChild.style = `
+            background: none;
+        `
     }
 
     return (
