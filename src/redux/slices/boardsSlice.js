@@ -14,6 +14,25 @@ export const boardsSlice = createSlice({
 
 			localStorage.setItem('boards', JSON.stringify(current(state)));
 		},
+		insertAfter: (state, action) => {
+			const { droppedBoard, board } = action.payload;
+
+			const droppedBoardInState = state.boards.find(stateBoard => stateBoard.id === droppedBoard.id);
+			const boardInState = state.boards.find(stateBoard => stateBoard.id === board.id);
+
+			const droppedIndex = state.boards.indexOf(droppedBoardInState);
+			const boardIndex = state.boards.indexOf(boardInState);
+
+			state.boards.splice(droppedIndex, 1);
+
+			if (droppedIndex > boardIndex) {
+				state.boards.splice(boardIndex + 1, 0, droppedBoardInState);
+			} else {
+				state.boards.splice(boardIndex, 0, droppedBoardInState)
+			}
+
+			// localStorage.setItem('tasks', JSON.stringify(current(state)));
+		},
 		remove: (state, action) => {
 			const board = action.payload;
 			const boardInState = state.boards.find(stateBoard => stateBoard.id === board.id);
@@ -35,6 +54,7 @@ export const boardsSlice = createSlice({
 export const {
 	setCurrent,
 	create,
+	insertAfter,
 	remove,
 	setTitle
 } = boardsSlice.actions;

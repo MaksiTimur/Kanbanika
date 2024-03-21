@@ -1,8 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './BoardCard.css';
+import { insertAfter } from '../../../redux/slices/boardsSlice';
 import { setDraggable, setDragging } from '../../../redux/slices/dragSlice';
 
 const BoardCard = ({ data, onClick }) => {
+    const droppedBoard = useSelector(state => state.dragReducer).item;
     const dispatch = useDispatch();
 
     const handleDragStart = (e, data) => {
@@ -10,21 +12,41 @@ const BoardCard = ({ data, onClick }) => {
         dispatch(setDragging(true));
     };
 
+    const handleDrop = (e, board) => {
+        e.preventDefault();
+
+        e.currentTarget.style = `
+            box-shadow: none;
+        `;
+
+        if (droppedBoard.id === board.id) return;
+
+        dispatch(insertAfter({ droppedBoard, board }));
+        dispatch(setDragging(false));
+    };
+
     const handleDragEnd = e => {
+        e.currentTarget.style = `
+            box-shadow: none;
+        `;
+
         dispatch(setDragging(false));
     };
 
     const handleDragOver = e => {
         e.preventDefault();
+
+        e.currentTarget.style = `
+            -webkit-box-shadow: 4px 0px 0px 0px #1a1c22;
+            -moz-box-shadow: 4px 0px 0px 0px #1a1c22;
+            box-shadow: 4px 0px 0px 0px #1a1c22;
+        `;
     };
 
     const handleDragLeave = e => {
-
-    };
-
-    const handleDrop = (e, data) => {
-        e.preventDefault();
-        dispatch(setDragging(false));
+        e.currentTarget.style = `
+            box-shadow: none;
+        `;
     };
 
     return (
