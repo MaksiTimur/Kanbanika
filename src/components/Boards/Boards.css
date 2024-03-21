@@ -4,7 +4,7 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     gap: 16px;
-    padding-bottom: 32px;
+    padding: 8px;
     max-height: 80vh;
     overflow-y: auto;
 }
