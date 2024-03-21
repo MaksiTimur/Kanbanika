@@ -5,4 +5,6 @@
     grid-row-gap: 0px;
     gap: 16px;
     padding-bottom: 32px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
