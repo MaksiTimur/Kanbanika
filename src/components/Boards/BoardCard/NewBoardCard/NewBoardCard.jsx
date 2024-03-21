@@ -1,4 +1,4 @@
-import '../BoardCard.css';
+import './NewBoardCard.css';
 
 const NewBoardCard = ({ data, onClick }) => {
     return (
