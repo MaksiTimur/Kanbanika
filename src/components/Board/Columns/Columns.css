@@ -4,6 +4,7 @@
     overflow: auto;
     height: fit-content;
     overflow-y: hidden;
+    margin-bottom: 8px;
 }
 
 #create-column {
