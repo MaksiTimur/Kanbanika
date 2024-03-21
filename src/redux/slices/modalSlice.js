@@ -2,16 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const columnsSlice = createSlice({
 	name: 'modal',
-	initialState: false,
+	initialState: {},
 	reducers: {
-		show: (state, action) => {
-            return state = action.payload;
+		setShow: (state, action) => {
+			const entries = Object.entries(action.payload)[0];
+			state[entries[0]] = entries[1];
+		},
+		resetShow: state => {
+			state = {};
 		}
 	}
 });
 
 export const {
-	show
+	setShow,
+	resetShow
 } = columnsSlice.actions;
 
 export default columnsSlice.reducer;
