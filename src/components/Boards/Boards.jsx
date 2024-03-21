@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import BoardCard from "./BoardCard/BoardCard";
+import NewBoardCard from './BoardCard/NewBoardCard/NewBoardCard';
 import './Boards.css';
 import { useNavigate } from 'react-router-dom';
 import { FaCirclePlus } from "react-icons/fa6";
 import { create } from '../../redux/slices/boardsSlice';
+import DeletionZone from '../DeletionZone/DeletionZone';
 
 const Boards = () => {
     const boardsData = useSelector(state => state.boardsReducer).boards;
@@ -26,14 +28,17 @@ const Boards = () => {
     });
 
     return (
-        <div className="boards">
-            {boards}
-            <BoardCard
-                data={{ title: <FaCirclePlus />, id: 'create-board' }}
-                key='create-board'
-                onClick={() => dispatch(create({ title: 'New Board' }))}
-            />
-        </div>
+        <>
+            <div className="boards">
+                {boards}
+                <NewBoardCard
+                    data={{ title: <FaCirclePlus />, id: 'create-board' }}
+                    key='create-board'
+                    onClick={() => dispatch(create({ title: 'New Board' }))}
+                />
+            </div>
+            <DeletionZone />
+        </>
     )
 }
 
