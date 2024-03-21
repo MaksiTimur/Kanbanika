@@ -15,6 +15,7 @@
 }
 
 .column-header h2 {
+    text-transform: capitalize;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

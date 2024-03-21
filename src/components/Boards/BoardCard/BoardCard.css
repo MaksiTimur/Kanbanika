@@ -16,6 +16,7 @@
 }
 
 .board-card .title {
+    text-transform: capitalize;
     margin: 0;
     top: 0;
     left: 0;
