@@ -1,11 +1,8 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
-const init = JSON.parse(localStorage.getItem('tasks')) ?? { tasks: [], current: null };
-init.tasks.sort((a, b) => a.column.localeCompare(b.column));
-
 export const tasksSlice = createSlice({
 	name: 'tasks',
-	initialState: init,
+	initialState: JSON.parse(localStorage.getItem('tasks')) ?? { tasks: [], current: null },
 	reducers: {
 		setCurrent: (state, action) => {
 			state.current = action.payload;
@@ -14,7 +11,6 @@ export const tasksSlice = createSlice({
 			const newTask = { type: "task", title: action.payload.title, id: self.crypto.randomUUID(), column: action.payload.column };
 
 			state.tasks.push(newTask);
-			state.tasks.sort((a, b) => a.column.localeCompare(b.column));
 
 			localStorage.setItem('tasks', JSON.stringify(current(state)));
 		},
@@ -51,6 +47,7 @@ export const tasksSlice = createSlice({
 
 			const taskInState = state.tasks.find(taskState => taskState.id === task.id);
 			taskInState.column = columnId;
+			localStorage.setItem('tasks', JSON.stringify(current(state)));
 		}
 	}
 });
