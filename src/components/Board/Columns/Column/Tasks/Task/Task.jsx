@@ -4,7 +4,7 @@ import { insertAfter } from '../../../../../../redux/slices/tasksSlice';
 import { setDraggable, setDragging } from '../../../../../../redux/slices/dragSlice';
 
 const Task = ({ data }) => {
-    const droppedTask = useSelector(state => state.dragReducer).item;
+    const dragItem = useSelector(state => state.dragReducer).item;
     const dispatch = useDispatch();
 
     const handleDragStart = (e, task) => {
@@ -15,13 +15,15 @@ const Task = ({ data }) => {
     const handleDrop = (e, task) => {
         e.preventDefault();
 
+        if (dragItem.type !== 'task') return;
+
         e.target.style = `
             box-shadow: none;
         `;
 
-        if (droppedTask.id === task.id) return;
+        if (dragItem.id === task.id) return;
 
-        dispatch(insertAfter({ droppedTask, task }));
+        dispatch(insertAfter({ droppedTask: dragItem, task }));
         dispatch(setDragging(false));
     }
 
@@ -35,6 +37,8 @@ const Task = ({ data }) => {
 
     const handleDragOver = e => {
         e.preventDefault();
+
+        if (dragItem.type !== 'task') return;
 
         e.target.style = `
             box-shadow: 0 4px #1a1c22;
