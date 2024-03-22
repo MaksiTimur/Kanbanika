@@ -41,7 +41,7 @@ const Task = ({ data }) => {
         if (dragItem.type !== 'task') return;
 
         e.target.style = `
-            box-shadow: 0 4px #1a1c22;
+            box-shadow: 0 4px var(--contrast-color);
         `;
     }
 

@@ -58,7 +58,6 @@ export const tasksSlice = createSlice({
 			}
 
 			localStorage.setItem('tasks', JSON.stringify(current(state)));
-			console.log(current(state));
 		},
 		setColumn: (state, action) => {
 			const task = action.payload.task;

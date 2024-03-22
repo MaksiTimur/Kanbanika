@@ -1,3 +1,5 @@
+@import url(/src/colors.css);
+
 .board-rename {
     display: flex;
     flex-direction: column;
@@ -7,5 +9,5 @@
 .board-rename button {
     padding: 8px;
     border-radius: 4px;
-    background: #1f2229;
+    background: var(--main-color);
 }

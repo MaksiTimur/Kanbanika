@@ -12,11 +12,9 @@
 .modal {
     padding: 16px;
     position: fixed;
-    background: #242732;
+    background: var(--accent-color);
     border-radius: 8px;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 0px var(--background-shadow);
 }
 
 .modal .modal-close {

@@ -15,7 +15,7 @@ const DeletionZone = () => {
         e.preventDefault();
 
         e.currentTarget.style = `
-            background: rgba(255, 0, 0, .3);
+            background: var(--warning-color);
         `;
 
         e.currentTarget.firstChild.style = `
@@ -25,7 +25,7 @@ const DeletionZone = () => {
 
     const handleDrop = e => {
         e.currentTarget.style = `
-            background: rgba(255, 0, 0, .25);
+            background: var(--warning-hover-color);
         `;
 
         e.currentTarget.firstChild.style = `
@@ -55,7 +55,7 @@ const DeletionZone = () => {
 
     const handleDragLeave = e => {
         e.currentTarget.style = `
-            background: rgba(255, 0, 0, .25);
+            background: var(--warning-hover-color);
         `;
 
         e.currentTarget.firstChild.style = `

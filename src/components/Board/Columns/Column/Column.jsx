@@ -33,17 +33,13 @@ const Column = ({ data }) => {
                 if (tasksElements.children.length) return;
 
                 e.currentTarget.style = `
-                    -webkit-box-shadow: inset 0px 0px 8px 0px #1a1c22;
-                    -moz-box-shadow: inset 0px 0px 8px 0px #1a1c22;
-                    box-shadow: inset 0px 0px 8px 0px #1a1c22;
+                    box-shadow: inset 0px 0px 8px 0px var(--contrast-color);
                 `;
 
                 break;
             case 'column':
                 e.currentTarget.style = `
-                    -webkit-box-shadow: 4px 0px 0px 0px #1a1c22;
-                    -moz-box-shadow: 4px 0px 0px 0px #1a1c22;
-                    box-shadow: 4px 0px 0px 0px #1a1c22;
+                    box-shadow: 4px 0px 0px 0px var(--contrast-color);
                 `;
 
                 break;

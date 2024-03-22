@@ -37,9 +37,7 @@ const BoardCard = ({ data, onClick }) => {
         e.preventDefault();
 
         e.currentTarget.style = `
-            -webkit-box-shadow: 4px 0px 0px 0px #1a1c22;
-            -moz-box-shadow: 4px 0px 0px 0px #1a1c22;
-            box-shadow: 4px 0px 0px 0px #1a1c22;
+            box-shadow: 4px 0px 0px 0px var(--contrast-color);
         `;
     };
 

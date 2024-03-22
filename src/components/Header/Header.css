@@ -1,5 +1,5 @@
 header {
-    background: #1a1c22;
+    background: var(--contrast-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,7 +15,7 @@ header .logo {
 }
 
 header .logo:hover {
-    color: #e9edf8;
+    color: var(--text-hover-color);
 }
 
 header .icon,
