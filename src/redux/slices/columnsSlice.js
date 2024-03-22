@@ -37,6 +37,24 @@ export const columnsSlice = createSlice({
 			state.columns.splice(columnIndex, 1);
 			localStorage.setItem('columns', JSON.stringify(current(state)));
 		},
+		removeByBoard: (state, action) => {
+			const boardId = action.payload.id;
+			const deletionIndexes = [];
+
+			for (let i = 0; i < state.columns.length; i++) {
+				if (state.columns[i].board !== boardId) continue;
+
+				deletionIndexes.push(i);
+			}
+
+			deletionIndexes.sort((a, b) => b - a);
+
+			for (const index of deletionIndexes) {
+				state.columns.splice(index, 1);
+			}
+
+			localStorage.setItem('columns', JSON.stringify(current(state)));
+		},
 		setTitle: (state, action) => {
 			const column = state.columns.find(column => column.id === action.payload.id)
 
@@ -52,6 +70,7 @@ export const {
 	create,
 	insertAfter,
 	remove,
+	removeByBoard,
 	setTitle
 } = columnsSlice.actions;
 

@@ -41,6 +41,25 @@ export const tasksSlice = createSlice({
 			state.tasks.splice(taskIndex, 1);
 			localStorage.setItem('tasks', JSON.stringify(current(state)));
 		},
+		removeByColumn: (state, action) => {
+			const columnId = action.payload.id;
+			const deletionIndexes = [];
+
+			for (let i = 0; i < state.tasks.length; i++) {
+				if (state.tasks[i].column !== columnId) continue;
+
+				deletionIndexes.push(i);
+			}
+
+			deletionIndexes.sort((a, b) => b - a);
+
+			for (const index of deletionIndexes) {
+				state.tasks.splice(index, 1);
+			}
+
+			localStorage.setItem('tasks', JSON.stringify(current(state)));
+			console.log(current(state));
+		},
 		setColumn: (state, action) => {
 			const task = action.payload.task;
 			const columnId = action.payload.columnId;
@@ -57,6 +76,7 @@ export const {
 	create,
 	insertAfter,
 	remove,
+	removeByColumn,
 	setColumn
 } = tasksSlice.actions;
 

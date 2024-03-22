@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './DeletionZone.css';
 import { FaTrashCan } from "react-icons/fa6";
-import { remove as removeTask } from '../../redux/slices/tasksSlice';
-import { remove as removeColumn } from '../../redux/slices/columnsSlice';
+import { removeByColumn as removeTasksByColumn, remove as removeTask } from '../../redux/slices/tasksSlice';
+import { removeByBoard as removeColumnsByBoard, remove as removeColumn } from '../../redux/slices/columnsSlice';
 import { remove as removeBoard } from '../../redux/slices/boardsSlice';
 import { setDragging } from '../../redux/slices/dragSlice';
 
@@ -39,9 +39,12 @@ const DeletionZone = () => {
                 break;
             case 'column':
                 dispatch(removeColumn(element));
+                dispatch(removeTasksByColumn(element));
                 break;
             case 'board':
                 dispatch(removeBoard(element));
+                dispatch(removeColumnsByBoard(element));
+                dispatch(removeTasksByColumn(element));
                 break;
             default:
                 break;
