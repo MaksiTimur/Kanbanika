@@ -14,6 +14,22 @@ export const columnsSlice = createSlice({
 
 			localStorage.setItem('columns', JSON.stringify(current(state)));
 		},
+		insertAfter: (state, action) => {
+			const { droppedColumn, column } = action.payload;
+
+			const droppedIndex = state.columns.findIndex(stateColumn => stateColumn.id === droppedColumn.id);
+			const columnIndex = state.columns.findIndex(stateColumn => stateColumn.id === column.id);
+
+			state.columns.splice(droppedIndex, 1);
+
+			if (droppedIndex > columnIndex) {
+				state.columns.splice(columnIndex + 1, 0, droppedColumn);
+			} else {
+				state.columns.splice(columnIndex, 0, droppedColumn)
+			}
+
+			localStorage.setItem('columns', JSON.stringify(current(state)));
+		},
 		remove: (state, action) => {
 			const column = action.payload;
 			const columnIndex = state.columns.findIndex(stateColumn => stateColumn.id === column.id);
@@ -34,6 +50,7 @@ export const columnsSlice = createSlice({
 export const {
 	setCurrent,
 	create,
+	insertAfter,
 	remove,
 	setTitle
 } = columnsSlice.actions;
