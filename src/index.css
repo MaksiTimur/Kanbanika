@@ -51,12 +51,12 @@ h2 {
 }
 
 h3 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   margin: 0;
 }
 
-input {
+input, textarea {
   padding: 8px;
   border: 0;
   border-radius: 4px;
