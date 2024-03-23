@@ -7,6 +7,7 @@ import { FaPencil } from "react-icons/fa6";
 import BoardRename from "../components/Boards/BoardRename/BoardRename";
 import { useEffect } from "react";
 import DeletionZone from "../components/DeletionZone/DeletionZone";
+import { setCurrent } from "../redux/slices/boardsSlice";
 
 export async function loader({ params }) {
     return params.boardId;
@@ -35,13 +36,17 @@ const Board = () => {
                 <h1>
                     Board {board.title}
                 </h1 >
-                <button onClick={() => dispatch(setShow({ boardRename: true }))}>
+                <button onClick={() => {
+                    dispatch(setShow({ boardRename: true }));
+                    dispatch(setCurrent(board));
+                }}
+                >
                     <FaPencil />
                 </button>
-            </div>
+            </div >
             <BoardComponent data={board} />
             <DeletionZone />
-            {showModal && <Modal onClose={() => dispatch({ boardRename: false })}><BoardRename title={board.title} /></Modal>}
+            {showModal && <Modal onClose={() => dispatch(setShow({ boardRename: false }))}><BoardRename /></Modal>}
         </>
     );
 }

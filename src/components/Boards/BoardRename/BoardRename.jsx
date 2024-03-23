@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../../../redux/slices/boardsSlice';
 import { setShow } from '../../../redux/slices/modalSlice';
 
-const BoardRename = ({ title }) => {
+const BoardRename = () => {
     const boards = useSelector(state => state.boardsReducer).boards;
-    const boardId = useLoaderData();
+    const currentBoard = useSelector(state => state.boardsReducer).current;
     const dispatch = useDispatch();
 
     const handleSubmit = e => {
         boards.forEach(board => {
-            if (board.id !== boardId) return;
+            if (board.id !== currentBoard.id) return;
 
             const value = e.target.title.value;
 
@@ -25,7 +25,7 @@ const BoardRename = ({ title }) => {
     return (
         <Form className="board-rename" onSubmit={e => handleSubmit(e)}>
             <label htmlFor="title">Board Title</label>
-            <input type="text" name="title" defaultValue={title} />
+            <input type="text" name="title" defaultValue={currentBoard.title} />
             <button type='submit'>Confirm</button>
         </Form>
     );

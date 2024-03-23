@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setTitle } from '../../../../../redux/slices/columnsSlice';
 import { setShow } from '../../../../../redux/slices/modalSlice';
 
-const ColumnRename = ({ title }) => {
+const ColumnRename = () => {
     const columns = useSelector(state => state.columnsReducer).columns;
     const currentColumn = useSelector(state => state.columnsReducer).current;
     const dispatch = useDispatch();
@@ -22,17 +22,10 @@ const ColumnRename = ({ title }) => {
         });
     }
 
-    if (!title) {
-        const currentColumn = useSelector(state => state.columnsReducer).current;
-
-        const column = columns.find(column => column.id === currentColumn.id);
-        title = column.title;
-    }
-
     return (
         <Form className="column-rename" onSubmit={e => handleSubmit(e)}>
             <label htmlFor="title">Column Title</label>
-            <input type="text" name="title" defaultValue={title} />
+            <input type="text" name="title" defaultValue={currentColumn.title} />
             <button type='submit'>Confirm</button>
         </Form>
     );
