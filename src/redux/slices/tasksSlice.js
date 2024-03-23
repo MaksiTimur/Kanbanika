@@ -66,6 +66,13 @@ export const tasksSlice = createSlice({
 			const taskInState = state.tasks.find(taskState => taskState.id === task.id);
 			taskInState.column = columnId;
 			localStorage.setItem('tasks', JSON.stringify(current(state)));
+		},
+		setTitle: (state, action) => {
+			const task = state.tasks.find(task => task.id === action.payload.id)
+
+			task.title = action.payload.value;
+
+			localStorage.setItem('tasks', JSON.stringify(current(state)));
 		}
 	}
 });
@@ -76,7 +83,8 @@ export const {
 	insertAfter,
 	remove,
 	removeByColumn,
-	setColumn
+	setColumn,
+	setTitle
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
