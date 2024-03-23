@@ -2,7 +2,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 
 export const boardsSlice = createSlice({
 	name: 'boards',
-	initialState: JSON.parse(localStorage.getItem('boards')) ?? { boards: [], current: null },
+	initialState: { boards: JSON.parse(localStorage.getItem('boards')) ?? [], current: null },
 	reducers: {
 		setCurrent: (state, action) => {
 			state.current = action.payload;
@@ -12,7 +12,7 @@ export const boardsSlice = createSlice({
 
 			state.boards.push(newBoard);
 
-			localStorage.setItem('boards', JSON.stringify(current(state)));
+			localStorage.setItem('boards', JSON.stringify(current(state.boards)));
 		},
 		insertAfter: (state, action) => {
 			const { droppedBoard, board } = action.payload;
@@ -28,21 +28,21 @@ export const boardsSlice = createSlice({
 				state.boards.splice(boardIndex, 0, droppedBoard)
 			}
 
-			localStorage.setItem('boards', JSON.stringify(current(state)));
+			localStorage.setItem('boards', JSON.stringify(current(state.boards)));
 		},
 		remove: (state, action) => {
 			const board = action.payload;
 			const boardIndex = state.boards.findIndex(stateBoard => stateBoard.id === board.id);
 
 			state.boards.splice(boardIndex, 1);
-			localStorage.setItem('boards', JSON.stringify(current(state)));
+			localStorage.setItem('boards', JSON.stringify(current(state.boards)));
 		},
 		setTitle: (state, action) => {
 			const board = state.boards.find(board => board.id === action.payload.id)
 
 			board.title = action.payload.value;
 
-			localStorage.setItem('boards', JSON.stringify(current(state)));
+			localStorage.setItem('boards', JSON.stringify(current(state.boards)));
 		}
 	}
 });

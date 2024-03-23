@@ -2,17 +2,22 @@ import { createSlice, current } from "@reduxjs/toolkit";
 
 export const tasksSlice = createSlice({
 	name: 'tasks',
-	initialState: JSON.parse(localStorage.getItem('tasks')) ?? { tasks: [], current: null },
+	initialState: { tasks: JSON.parse(localStorage.getItem('tasks')) ?? [], current: null },
 	reducers: {
 		setCurrent: (state, action) => {
 			state.current = action.payload;
 		},
 		create: (state, action) => {
-			const newTask = { type: "task", title: action.payload.title, id: self.crypto.randomUUID(), column: action.payload.column };
+			const newTask = {
+				type: "task",
+				title: action.payload.title,
+				description: '',
+				id: self.crypto.randomUUID(),
+				column: action.payload.column };
 
 			state.tasks.push(newTask);
 
-			localStorage.setItem('tasks', JSON.stringify(current(state)));
+			localStorage.setItem('tasks', JSON.stringify(current(state.tasks)));
 		},
 		insertAfter: (state, action) => {
 			const { droppedTask, task } = action.payload;
@@ -32,14 +37,14 @@ export const tasksSlice = createSlice({
 				state.tasks.splice(taskIndex, 0, droppedTask)
 			}
 
-			localStorage.setItem('tasks', JSON.stringify(current(state)));
+			localStorage.setItem('tasks', JSON.stringify(current(state.tasks)));
 		},
 		remove: (state, action) => {
 			const task = action.payload;
 			const taskIndex = state.tasks.findIndex(stateTask => stateTask.id === task.id);
 
 			state.tasks.splice(taskIndex, 1);
-			localStorage.setItem('tasks', JSON.stringify(current(state)));
+			localStorage.setItem('tasks', JSON.stringify(current(state.tasks)));
 		},
 		removeByColumn: (state, action) => {
 			const columnId = action.payload.id;
@@ -57,7 +62,7 @@ export const tasksSlice = createSlice({
 				state.tasks.splice(index, 1);
 			}
 
-			localStorage.setItem('tasks', JSON.stringify(current(state)));
+			localStorage.setItem('tasks', JSON.stringify(current(state.tasks)));
 		},
 		setColumn: (state, action) => {
 			const task = action.payload.task;
@@ -65,14 +70,15 @@ export const tasksSlice = createSlice({
 
 			const taskInState = state.tasks.find(taskState => taskState.id === task.id);
 			taskInState.column = columnId;
-			localStorage.setItem('tasks', JSON.stringify(current(state)));
+
+			localStorage.setItem('tasks', JSON.stringify(current(state.tasks)));
 		},
 		setTitle: (state, action) => {
 			const task = state.tasks.find(task => task.id === action.payload.id)
 
 			task.title = action.payload.value;
 
-			localStorage.setItem('tasks', JSON.stringify(current(state)));
+			localStorage.setItem('tasks', JSON.stringify(current(state.tasks)));
 		}
 	}
 });

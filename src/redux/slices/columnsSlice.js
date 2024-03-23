@@ -2,7 +2,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 
 export const columnsSlice = createSlice({
 	name: 'columns',
-	initialState: JSON.parse(localStorage.getItem('columns')) ?? { columns: [], current: null },
+	initialState: { columns: JSON.parse(localStorage.getItem('columns')) ?? [], current: null },
 	reducers: {
 		setCurrent: (state, action) => {
 			state.current = action.payload;
@@ -12,7 +12,7 @@ export const columnsSlice = createSlice({
 
 			state.columns.push(newColumn);
 
-			localStorage.setItem('columns', JSON.stringify(current(state)));
+			localStorage.setItem('columns', JSON.stringify(current(state.columns)));
 		},
 		insertAfter: (state, action) => {
 			const { droppedColumn, column } = action.payload;
@@ -28,14 +28,14 @@ export const columnsSlice = createSlice({
 				state.columns.splice(columnIndex, 0, droppedColumn)
 			}
 
-			localStorage.setItem('columns', JSON.stringify(current(state)));
+			localStorage.setItem('columns', JSON.stringify(current(state.columns)));
 		},
 		remove: (state, action) => {
 			const column = action.payload;
 			const columnIndex = state.columns.findIndex(stateColumn => stateColumn.id === column.id);
 
 			state.columns.splice(columnIndex, 1);
-			localStorage.setItem('columns', JSON.stringify(current(state)));
+			localStorage.setItem('columns', JSON.stringify(current(state.columns)));
 		},
 		removeByBoard: (state, action) => {
 			const boardId = action.payload.id;
@@ -53,14 +53,14 @@ export const columnsSlice = createSlice({
 				state.columns.splice(index, 1);
 			}
 
-			localStorage.setItem('columns', JSON.stringify(current(state)));
+			localStorage.setItem('columns', JSON.stringify(current(state.columns)));
 		},
 		setTitle: (state, action) => {
 			const column = state.columns.find(column => column.id === action.payload.id)
 
 			column.title = action.payload.value;
 
-			localStorage.setItem('columns', JSON.stringify(current(state)));
+			localStorage.setItem('columns', JSON.stringify(current(state.columns)));
 		}
 	}
 });
