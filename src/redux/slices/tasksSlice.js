@@ -11,7 +11,7 @@ export const tasksSlice = createSlice({
 			const newTask = {
 				type: "task",
 				title: action.payload.title,
-				description: '',
+				description: null,
 				id: self.crypto.randomUUID(),
 				column: action.payload.column };
 
@@ -76,7 +76,14 @@ export const tasksSlice = createSlice({
 		setTitle: (state, action) => {
 			const task = state.tasks.find(task => task.id === action.payload.id)
 
-			task.title = action.payload.value;
+			task.title = action.payload.title;
+
+			localStorage.setItem('tasks', JSON.stringify(current(state.tasks)));
+		},
+		setDescription: (state, action) => {
+			const task = state.tasks.find(task => task.id === action.payload.id)
+
+			task.description = action.payload.description;
 
 			localStorage.setItem('tasks', JSON.stringify(current(state.tasks)));
 		}
@@ -90,7 +97,8 @@ export const {
 	remove,
 	removeByColumn,
 	setColumn,
-	setTitle
+	setTitle,
+	setDescription
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
