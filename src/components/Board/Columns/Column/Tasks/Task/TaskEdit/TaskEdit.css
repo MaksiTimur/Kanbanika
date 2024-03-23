@@ -1,0 +1,11 @@
+.task-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.task-edit button {
+    padding: 8px;
+    border-radius: 4px;
+    background: var(--main-color);;
+}
