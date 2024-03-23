@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './Task.css';
-import { insertAfter } from '../../../../../../redux/slices/tasksSlice';
+import { insertAfter, setCurrent } from '../../../../../../redux/slices/tasksSlice';
 import { setDraggable, setDragging } from '../../../../../../redux/slices/dragSlice';
+import { setShow } from '../../../../../../redux/slices/modalSlice';
 
 const Task = ({ data }) => {
     const dragItem = useSelector(state => state.dragReducer).item;
@@ -46,6 +47,10 @@ const Task = ({ data }) => {
     return (
         <h3
             className='task'
+            onClick={() => {
+                dispatch(setCurrent(data));
+                dispatch(setShow({ taskEdit: true }));
+            }}
             draggable
             onDrag={e => handleDragStart(e, data)}
             onDragEnd={e => handleDragEnd(e)}
