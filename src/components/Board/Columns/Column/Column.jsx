@@ -32,15 +32,11 @@ const Column = ({ data }) => {
 
                 if (tasksElements.children.length) return;
 
-                e.currentTarget.style = `
-                    box-shadow: inset 0px 0px 8px 0px var(--contrast-color);
-                `;
+                e.currentTarget.style = `box-shadow: inset 0px 0px 8px 0px var(--contrast-color);`;
 
                 break;
             case 'column':
-                e.currentTarget.style = `
-                    box-shadow: 4px 0px 0px 0px var(--contrast-color);
-                `;
+                e.currentTarget.style = `box-shadow: 4px 0px 0px 0px var(--contrast-color);`;
 
                 break;
             default:
@@ -62,23 +58,17 @@ const Column = ({ data }) => {
                 break;
         }
 
-        e.currentTarget.style = `
-            box-shadow: none;
-        `;
+        e.currentTarget.style = `box-shadow: none;`;
 
         dispatch(setDragging(false));
     }
 
     const handleDragLeave = e => {
-        e.target.style = `
-            box-shadow: none;
-        `;
+        e.target.style = `box-shadow: none;`;
     }
 
     const handleDragEnd = e => {
-        e.target.style = `
-            box-shadow: none;
-        `;
+        e.target.style = `box-shadow: none;`;
     }
 
     return (

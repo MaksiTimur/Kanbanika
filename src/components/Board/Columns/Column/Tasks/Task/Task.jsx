@@ -17,9 +17,7 @@ const Task = ({ data }) => {
 
         if (dragItem.type !== 'task') return;
 
-        e.target.style = `
-            box-shadow: none;
-        `;
+        e.target.style = `box-shadow: none;`;
 
         if (dragItem.id === task.id) return;
 
@@ -28,9 +26,7 @@ const Task = ({ data }) => {
     }
 
     const handleDragEnd = (e) => {
-        e.target.style = `
-            box-shadow: none;
-        `;
+        e.target.style = `box-shadow: none;`;
 
         dispatch(setDragging(false));
     }
@@ -40,15 +36,11 @@ const Task = ({ data }) => {
 
         if (dragItem.type !== 'task') return;
 
-        e.target.style = `
-            box-shadow: 0 4px var(--contrast-color);
-        `;
+        e.target.style = `box-shadow: 0 4px var(--contrast-color);`;
     }
 
     const handleDragLeave = e => {
-        e.target.style = `
-            box-shadow: none;
-        `;
+        e.target.style = `box-shadow: none;`;
     }
 
     return (
