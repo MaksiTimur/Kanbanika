@@ -13,3 +13,13 @@
     width: 18px;
     height: 18px;
 }
+
+.board-title {
+    max-width: 100%;
+}
+
+.board-title h1 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

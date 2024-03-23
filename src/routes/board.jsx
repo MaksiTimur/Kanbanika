@@ -34,7 +34,7 @@ const Board = () => {
         <>
             <div className="board-title">
                 <h1>
-                    Board {board.title}
+                    Board <span>{board.title}</span>
                 </h1 >
                 <button onClick={() => {
                     dispatch(setShow({ boardRename: true }));
