@@ -1,7 +1,7 @@
 import { Form } from 'react-router-dom';
 import './TaskEdit.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setTitle } from '../../../../../../../redux/slices/tasksSlice';
+import { setDescription, setTitle } from '../../../../../../../redux/slices/tasksSlice';
 import { setShow } from '../../../../../../../redux/slices/modalSlice';
 
 const TaskEdit = () => {
@@ -13,12 +13,15 @@ const TaskEdit = () => {
         tasks.forEach(task => {
             if (task.id !== currentTask.id) return;
 
-            const value = e.target.title.value;
-            task = task;
+            const target = e.target;
 
-            if (value.length === 0) return;
+            const title = target.title.value;
+            const description = target.description.value;
 
-            dispatch(setTitle({ value, id: task.id }));
+            if (title.length === 0) return;
+
+            dispatch(setTitle({ title, id: task.id }));
+            dispatch(setDescription({ description, id: task.id }));
             dispatch(setShow({ taskEdit: false }));
         });
     }
@@ -27,6 +30,10 @@ const TaskEdit = () => {
         <Form className="task-edit" onSubmit={e => handleSubmit(e)}>
             <label htmlFor="title">Task Title</label>
             <input type="text" name="title" defaultValue={currentTask.title} />
+
+            <label htmlFor="description">Task Description</label>
+            <textarea name="description" rows="3" defaultValue={currentTask.description}></textarea>
+
             <button type='submit'>Confirm</button>
         </Form>
     );

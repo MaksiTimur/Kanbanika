@@ -45,7 +45,7 @@ const Task = ({ data }) => {
     }
 
     return (
-        <h3
+        <div
             className='task'
             onClick={() => {
                 dispatch(setCurrent(data));
@@ -58,8 +58,9 @@ const Task = ({ data }) => {
             onDragLeave={e => handleDragLeave(e)}
             onDrop={e => handleDrop(e, data)}
         >
-            {data.title}
-        </h3>
+            <h3 className='task-name'>{data.title}</h3>
+            <p className="task-description">{data.description ?? ''}</p>
+        </div>
     )
 }
 

@@ -1,8 +1,26 @@
 .task {
     width: 100%;
-    background: var(--main-color);;
+    background: var(--main-color);
     padding: 8px;
     border-radius: 8px;
+}
+
+.task h3 {
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.task p {
+    word-wrap: break-word;
+    font-size: 14px;
+    margin: 0;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .task:hover {

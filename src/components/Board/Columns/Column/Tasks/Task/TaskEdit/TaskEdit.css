@@ -2,6 +2,11 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    min-width: 300px;
+}
+
+.task-edit textarea {
+    resize: none;
 }
 
 .task-edit button {
