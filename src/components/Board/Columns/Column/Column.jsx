@@ -11,7 +11,12 @@ import { setDraggable, setDragging } from '../../../../redux/slices/dragSlice';
 const Column = ({ data }) => {
     useEffect(() => {
         dispatch(resetShow());
-    }, []);
+
+        const id = data.id;
+        const column = document.getElementById(id);
+
+        column.style = `background: ${data.background}`;
+    }, [data.background]);
 
     const dragItem = useSelector(state => state.dragReducer).item;
     const dispatch = useDispatch();
@@ -33,11 +38,9 @@ const Column = ({ data }) => {
                 if (tasksElements.children.length) return;
 
                 e.currentTarget.style = `box-shadow: inset 0px 0px 8px 0px var(--contrast-color);`;
-
                 break;
             case 'column':
                 e.currentTarget.style = `box-shadow: 4px 0px 0px 0px var(--contrast-color);`;
-
                 break;
             default:
                 break;
@@ -74,6 +77,7 @@ const Column = ({ data }) => {
     return (
         <div
             className='column'
+            id={data.id}
             draggable
             onDrag={e => handleDragStart(e, data)}
             onDragOver={e => handleDragOver(e)}
@@ -85,7 +89,7 @@ const Column = ({ data }) => {
                 <h2>{data.title}</h2>
                 <button onClick={() => {
                     dispatch(setCurrent(data));
-                    dispatch(setShow({ columnRename: true }));
+                    dispatch(setShow({ columnEdit: true }));
                 }}>
                     <FaPencil />
                 </button>

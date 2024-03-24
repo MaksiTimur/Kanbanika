@@ -4,7 +4,7 @@ import Column from './Column/Column';
 import { create } from '../../../redux/slices/columnsSlice';
 import './Columns.css';
 import Modal from '../../Modal/Modal';
-import ColumnRename from './Column/ColumnRename/ColumnRename';
+import ColumnEdit from './Column/ColumnEdit/ColumnEdit';
 import TaskEdit from './Column/Tasks/Task/TaskEdit/TaskEdit';
 import { setShow } from '../../../redux/slices/modalSlice';
 
@@ -12,7 +12,8 @@ const Columns = ({ data }) => {
     const columnsData = useSelector(state => state.columnsReducer).columns;
     const columns = Array(columnsData.length);
     const dispatch = useDispatch();
-    const showColumnModal = useSelector(state => state.modalReducer).columnRename;
+    
+    const showColumnModal = useSelector(state => state.modalReducer).columnEdit;
     const showTaskModal = useSelector(state => state.modalReducer).taskEdit;
 
     columnsData.forEach(columnData => {
@@ -39,7 +40,7 @@ const Columns = ({ data }) => {
                     <FaCirclePlus />
                 </button>
             </div >
-            {showColumnModal && <Modal onClose={() => dispatch(setShow({ columnRename: false }))}><ColumnRename /></Modal>}
+            {showColumnModal && <Modal onClose={() => dispatch(setShow({ columnEdit: false }))}><ColumnEdit /></Modal>}
             {showTaskModal && <Modal onClose={() => dispatch(setShow({ taskEdit: false }))}><TaskEdit /></Modal>}
         </>
     )

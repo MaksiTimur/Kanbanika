@@ -1,7 +1,7 @@
 import { Form } from 'react-router-dom';
 import './BoardEdit.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { resetBackground, setBackground, setTitle } from '../../../redux/slices/boardsSlice';
+import { setBackground, setTitle } from '../../../redux/slices/boardsSlice';
 import { setShow } from '../../../redux/slices/modalSlice';
 import { FaRegCircleXmark } from "react-icons/fa6";
 
@@ -9,6 +9,7 @@ const BoardEdit = () => {
     const boards = useSelector(state => state.boardsReducer).boards;
     const currentBoard = useSelector(state => state.boardsReducer).current;
     const dispatch = useDispatch();
+
     let board = null;
 
     boards.forEach(boardData => {
@@ -18,14 +19,14 @@ const BoardEdit = () => {
     });
 
     const handleSubmit = e => {
-            const title = e.target.title.value;
-            const background = e.target.background.value;
+        const title = e.target.title.value;
+        const background = e.target.background.value;
 
-            if (title.length === 0) return;
+        if (title.length === 0) return;
 
-            dispatch(setTitle({ title, id: board.id }));
-            dispatch(setBackground({ background, id: board.id }));
-            dispatch(setShow({ boardEdit: false }));
+        dispatch(setTitle({ title, id: board.id }));
+        dispatch(setBackground({ background, id: board.id }));
+        dispatch(setShow({ boardEdit: false }));
     }
 
     const resetBgColor = e => {
@@ -41,11 +42,12 @@ const BoardEdit = () => {
             <label htmlFor="title">Board Title</label>
             <input type="text" name="title" defaultValue={currentBoard.title} />
 
-            <label htmlFor="background">Board Background</label>
+            <label htmlFor="background">Column Background</label>
             <div className="change-bg">
                 <button onClick={e => resetBgColor(e)}><FaRegCircleXmark /></button>
                 <input type="color" name="background" defaultValue={currentBoard.background ?? '#1f2229'} />
             </div>
+
             <button type='submit'>Confirm</button>
         </Form>
     );
