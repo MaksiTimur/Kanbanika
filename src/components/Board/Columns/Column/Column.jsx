@@ -54,6 +54,7 @@ const Column = ({ data }) => {
             case 'task':
                 dispatch(setColumn({ task: dragItem, columnId }));
                 e.currentTarget.classList.remove('dragging-down');
+                e.currentTarget.classList.remove('dragging-inset');
                 break;
             case 'column':
                 dispatch(insertAfter({ droppedColumn: dragItem, column }))

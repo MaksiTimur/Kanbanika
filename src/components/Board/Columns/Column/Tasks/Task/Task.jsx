@@ -19,6 +19,7 @@ const Task = ({ data }) => {
         if (dragItem.type !== 'task') return;
 
         e.target.classList.remove('dragging-down');
+        e.currentTarget.classList.remove('dragging-inset');
 
         if (dragItem.id === task.id) return;
 
@@ -28,6 +29,7 @@ const Task = ({ data }) => {
 
     const handleDragEnd = (e) => {
         e.target.classList.remove('dragging-down');
+        e.currentTarget.classList.remove('dragging-inset');
 
         dispatch(setDragging(false));
     }
@@ -37,11 +39,12 @@ const Task = ({ data }) => {
 
         if (dragItem.type !== 'task') return;
 
-        e.target.classList.add('dragging-down');
+        e.currentTarget.classList.add('dragging-down');
     }
 
     const handleDragLeave = e => {
         e.target.classList.remove('dragging-down');
+        e.currentTarget.classList.remove('dragging-inset');
     }
 
     return (
