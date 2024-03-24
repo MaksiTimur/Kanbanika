@@ -8,7 +8,12 @@ export const boardsSlice = createSlice({
 			state.current = action.payload;
 		},
 		create: (state, action) => {
-			const newBoard = { type: "board", title: action.payload.title, id: self.crypto.randomUUID() };
+			const newBoard = {
+				type: "board",
+				title: action.payload.title,
+				background: null,
+				id: self.crypto.randomUUID()
+			};
 
 			state.boards.push(newBoard);
 
@@ -40,7 +45,14 @@ export const boardsSlice = createSlice({
 		setTitle: (state, action) => {
 			const board = state.boards.find(board => board.id === action.payload.id)
 
-			board.title = action.payload.value;
+			board.title = action.payload.title;
+
+			localStorage.setItem('boards', JSON.stringify(current(state.boards)));
+		},
+		setBackground: (state, action) => {
+			const board = state.boards.find(board => board.id === action.payload.id)
+
+			board.background = action.payload.background;
 
 			localStorage.setItem('boards', JSON.stringify(current(state.boards)));
 		}
@@ -52,7 +64,8 @@ export const {
 	create,
 	insertAfter,
 	remove,
-	setTitle
+	setTitle,
+	setBackground
 } = boardsSlice.actions;
 
 export default boardsSlice.reducer;
