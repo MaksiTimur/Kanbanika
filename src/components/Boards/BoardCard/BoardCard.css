@@ -4,6 +4,9 @@
     position: relative;
     border-radius: 8px;
     height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .board-card:hover {
@@ -19,4 +22,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.board-card button {
+    display: flex;
+}
+
+.board-card button svg {
+    width: 18px;
+    height: 18px;
 }

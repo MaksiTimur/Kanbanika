@@ -7,6 +7,9 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { create } from '../../redux/slices/boardsSlice';
 import DeletionZone from '../DeletionZone/DeletionZone';
 import { useEffect } from 'react';
+import Modal from '../Modal/Modal';
+import { setShow } from '../../redux/slices/modalSlice';
+import BoardEdit from './BoardEdit/BoardEdit';
 
 const Boards = () => {
     useEffect(() => {
@@ -18,6 +21,8 @@ const Boards = () => {
     const boards = Array(boardsData.length);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const showModal = useSelector(state => state.modalReducer).boardEdit;
 
     const handleClick = (id) => {
         navigate(`${id}`);
@@ -44,6 +49,7 @@ const Boards = () => {
                 />
             </div>
             <DeletionZone />
+            {showModal && <Modal onClose={() => dispatch(setShow({ boardEdit: false }))}><BoardEdit /></Modal>}
         </>
     )
 }

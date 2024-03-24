@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './BoardCard.css';
-import { insertAfter } from '../../../redux/slices/boardsSlice';
+import { insertAfter, setCurrent } from '../../../redux/slices/boardsSlice';
 import { setDraggable, setDragging } from '../../../redux/slices/dragSlice';
+import { FaPencil } from "react-icons/fa6";
+import { setShow } from '../../../redux/slices/modalSlice';
 
 const BoardCard = ({ data, onClick }) => {
     const droppedBoard = useSelector(state => state.dragReducer).item;
@@ -39,6 +41,13 @@ const BoardCard = ({ data, onClick }) => {
         e.currentTarget.classList.remove('dragging-right');
     };
 
+    const buttonClickHandler = e => {
+        e.stopPropagation();
+
+        dispatch(setCurrent(data));
+        dispatch(setShow({ boardEdit: true }));
+    }
+
     return (
         <div
             className="board-card"
@@ -52,6 +61,7 @@ const BoardCard = ({ data, onClick }) => {
             onDrop={e => handleDrop(e, data)}
         >
             <h2 className="title">{data.title}</h2>
+            <button onClick={buttonClickHandler}><FaPencil /></button>
         </div>
     )
 }

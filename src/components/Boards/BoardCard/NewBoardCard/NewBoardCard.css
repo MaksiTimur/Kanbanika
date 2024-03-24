@@ -1,7 +1,13 @@
+#create-board {
+    display: flex;
+    justify-content: center;
+}
+
 #create-board .title {
     display: flex;
     justify-content: center;
 }
+
 
 #create-board .title svg {
     height: auto;
