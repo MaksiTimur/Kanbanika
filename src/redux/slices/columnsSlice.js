@@ -8,7 +8,13 @@ export const columnsSlice = createSlice({
 			state.current = action.payload;
 		},
 		create: (state, action) => {
-			const newColumn = { type: "column", title: action.payload.title, id: self.crypto.randomUUID(), board: action.payload.board };
+			const newColumn = {
+				type: "column",
+				title: action.payload.title,
+				background: null,
+				id: self.crypto.randomUUID(),
+				board: action.payload.board
+			};
 
 			state.columns.push(newColumn);
 
@@ -58,7 +64,14 @@ export const columnsSlice = createSlice({
 		setTitle: (state, action) => {
 			const column = state.columns.find(column => column.id === action.payload.id)
 
-			column.title = action.payload.value;
+			column.title = action.payload.title;
+
+			localStorage.setItem('columns', JSON.stringify(current(state.columns)));
+		},
+		setBackground: (state, action) => {
+			const column = state.columns.find(column => column.id === action.payload.id)
+
+			column.background = action.payload.background;
 
 			localStorage.setItem('columns', JSON.stringify(current(state.columns)));
 		}
@@ -71,7 +84,8 @@ export const {
 	insertAfter,
 	remove,
 	removeByBoard,
-	setTitle
+	setTitle,
+	setBackground
 } = columnsSlice.actions;
 
 export default columnsSlice.reducer;
