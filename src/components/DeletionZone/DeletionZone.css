@@ -1,5 +1,5 @@
 #deletion-zone {
-    background: rgba(255, 0, 0, .25);
+    background: var(--warning-color);
     height: auto;
     margin-top: auto;
     margin-bottom: 0;
