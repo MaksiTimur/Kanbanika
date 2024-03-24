@@ -4,7 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import { resetShow, setShow } from "../redux/slices/modalSlice";
 import Modal from "../components/Modal/Modal";
 import { FaPencil } from "react-icons/fa6";
-import BoardRename from "../components/Boards/BoardRename/BoardRename";
+import BoardEdit from "../components/Boards/BoardEdit/BoardEdit";
 import { useEffect } from "react";
 import DeletionZone from "../components/DeletionZone/DeletionZone";
 import { setCurrent } from "../redux/slices/boardsSlice";
@@ -14,21 +14,26 @@ export async function loader({ params }) {
 }
 
 const Board = () => {
-    useEffect(() => {
-        dispatch(resetShow());
-    }, []);
-
     const boardsData = useSelector(state => state.boardsReducer).boards;
     const id = useLoaderData();
     const dispatch = useDispatch();
     let board = null;
-    const showModal = useSelector(state => state.modalReducer).boardRename;
+
+    const showModal = useSelector(state => state.modalReducer).boardEdit;
 
     boardsData.forEach(boardData => {
         if (boardData.id != id) return;
 
         board = boardData;
     });
+
+    useEffect(() => {
+        dispatch(resetShow());
+
+        const wrapper = document.querySelector('.wrapper');
+
+        wrapper.style = `background: ${board.background}`;
+    }, [board.background]);
 
     return (
         <>
@@ -37,7 +42,7 @@ const Board = () => {
                     Board <span>{board.title}</span>
                 </h1 >
                 <button onClick={() => {
-                    dispatch(setShow({ boardRename: true }));
+                    dispatch(setShow({ boardEdit: true }));
                     dispatch(setCurrent(board));
                 }}
                 >
@@ -46,7 +51,7 @@ const Board = () => {
             </div >
             <BoardComponent data={board} />
             <DeletionZone />
-            {showModal && <Modal onClose={() => dispatch(setShow({ boardRename: false }))}><BoardRename /></Modal>}
+            {showModal && <Modal onClose={() => dispatch(setShow({ boardEdit: false }))}><BoardEdit /></Modal>}
         </>
     );
 }

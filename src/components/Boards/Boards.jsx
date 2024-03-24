@@ -6,8 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { FaCirclePlus } from "react-icons/fa6";
 import { create } from '../../redux/slices/boardsSlice';
 import DeletionZone from '../DeletionZone/DeletionZone';
+import { useEffect } from 'react';
 
 const Boards = () => {
+    useEffect(() => {
+        const wrapper = document.querySelector('.wrapper');
+        wrapper.style = ``;
+    }, [])
+
     const boardsData = useSelector(state => state.boardsReducer).boards;
     const boards = Array(boardsData.length);
     const navigate = useNavigate();
