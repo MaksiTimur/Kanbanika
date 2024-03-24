@@ -37,10 +37,10 @@ const Column = ({ data }) => {
 
                 if (tasksElements.children.length) return;
 
-                e.currentTarget.style = `box-shadow: inset 0px 0px 8px 0px var(--contrast-color);`;
+                e.currentTarget.classList.add('dragging-inset');
                 break;
             case 'column':
-                e.currentTarget.style = `box-shadow: 4px 0px 0px 0px var(--contrast-color);`;
+                e.currentTarget.classList.add('dragging-right');
                 break;
             default:
                 break;
@@ -53,25 +53,28 @@ const Column = ({ data }) => {
         switch (dragItem.type) {
             case 'task':
                 dispatch(setColumn({ task: dragItem, columnId }));
+                e.currentTarget.classList.remove('dragging-down');
                 break;
             case 'column':
                 dispatch(insertAfter({ droppedColumn: dragItem, column }))
+                e.currentTarget.classList.remove('dragging-right');
+                e.currentTarget.classList.remove('dragging-inset');
                 break;
             default:
                 break;
         }
 
-        e.currentTarget.style = `box-shadow: none;`;
-
         dispatch(setDragging(false));
     }
 
     const handleDragLeave = e => {
-        e.target.style = `box-shadow: none;`;
+        e.target.classList.remove('dragging-right');
+        e.target.classList.remove('dragging-inset');
     }
 
     const handleDragEnd = e => {
-        e.target.style = `box-shadow: none;`;
+        e.target.classList.remove('dragging-right');
+        e.target.classList.remove('dragging-inset');
     }
 
     return (

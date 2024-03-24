@@ -15,7 +15,7 @@ const BoardCard = ({ data, onClick }) => {
     const handleDrop = (e, board) => {
         e.preventDefault();
 
-        e.currentTarget.style = `box-shadow: none;`;
+        e.currentTarget.classList.remove('dragging-right');
 
         if (droppedBoard.id === board.id) return;
 
@@ -24,7 +24,7 @@ const BoardCard = ({ data, onClick }) => {
     };
 
     const handleDragEnd = e => {
-        e.currentTarget.style = `box-shadow: none;`;
+        e.currentTarget.classList.remove('dragging-right');
 
         dispatch(setDragging(false));
     };
@@ -32,11 +32,11 @@ const BoardCard = ({ data, onClick }) => {
     const handleDragOver = e => {
         e.preventDefault();
 
-        e.currentTarget.style = `box-shadow: 4px 0px 0px 0px var(--contrast-color);`;
+        e.currentTarget.classList.add('dragging-right');
     };
 
     const handleDragLeave = e => {
-        e.currentTarget.style = `box-shadow: none;`;
+        e.currentTarget.classList.remove('dragging-right');
     };
 
     return (
