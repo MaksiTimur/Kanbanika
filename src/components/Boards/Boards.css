@@ -1,6 +1,6 @@
 .boards {
     display: grid;
-    grid-template-columns: repeat(3, 33.3%);
+    grid-template-columns: repeat(3, calc(33.3% - 10px));
     gap: 16px;
     padding: 8px;
     max-height: 80vh;
