@@ -40,6 +40,8 @@ const Column = ({ data }) => {
                 e.currentTarget.classList.add('dragging-inset');
                 break;
             case 'column':
+                if (e.currentTarget.id === dragItem.id) return;
+                
                 e.currentTarget.classList.add('dragging-right');
                 break;
             default:

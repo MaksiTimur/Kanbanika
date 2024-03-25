@@ -38,6 +38,7 @@ const Task = ({ data }) => {
         e.preventDefault();
 
         if (dragItem.type !== 'task') return;
+        if (e.currentTarget.id === dragItem.id) return;
 
         e.currentTarget.classList.add('dragging-down');
     }
@@ -50,6 +51,7 @@ const Task = ({ data }) => {
     return (
         <div
             className='task'
+            id={data.id}
             onClick={() => {
                 dispatch(setCurrent(data));
                 dispatch(setShow({ taskEdit: true }));
