@@ -35,6 +35,10 @@ a:hover {
   color: var(--text-hover-color);
 }
 
+p {
+  margin: 0;
+}
+
 button {
   background: none;
   border: none;
@@ -64,6 +68,15 @@ textarea {
   border-radius: 4px;
   background: var(--main-color);
   color: var(--text-color);
+}
+
+input[type="color"]:hover {
+  cursor: pointer;
+}
+
+input:invalid,
+textarea:invalid {
+  outline: 1px solid #eb502f;
 }
 
 #error-page {
