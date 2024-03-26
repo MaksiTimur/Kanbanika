@@ -1,0 +1,69 @@
+.change-bg {
+    display: flex;
+    flex-direction: column;
+    background: var(--main-color);
+    padding: 8px;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.change-bg p {
+    margin: 0;
+}
+
+.change-bg label {
+    margin-bottom: 4px;
+}
+
+.change-bg .bg-types {
+    display: flex;
+    margin-bottom: 4px;
+}
+
+.change-bg .bg-types button:not(:last-child) {
+    margin-right: 8px;
+}
+
+.change-bg .bg-types button {
+    display: flex;
+    background: var(--contrast-color);
+}
+
+.change-bg .bg-types button.active {
+    background: var(--main-color);
+}
+
+.change-bg .bg-types button:hover {
+    background: var(--accent-color);
+}
+
+.change-bg .bg-color {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.change-bg .bg-color button {
+    margin-right: 8px;
+    height: 16px;
+    padding: 0;
+}
+
+.change-bg .bg-color button svg {
+    height: 16px;
+    width: 16px;
+}
+
+.change-bg .bg-color input[type="color"] {
+    width: 100%;
+    height: 18px;
+    padding: 0;
+}
+
+.change-bg .bg-color,
+.change-bg input {
+    background: var(--contrast-color);
+    width: 160px;
+    height: 34px;
+}
