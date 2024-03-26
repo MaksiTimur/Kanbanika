@@ -27,12 +27,32 @@ const Board = () => {
         board = boardData;
     });
 
+    // Setting board's background
     useEffect(() => {
         dispatch(resetShow());
 
         const wrapper = document.querySelector('.wrapper');
 
-        wrapper.style = `background: ${board.background}`;
+        switch (board.background.active) {
+            case 'url':
+                wrapper.style = `
+                    background: url(${board.background.data.bgUrl});
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                `;
+                break;
+            case 'color':
+                wrapper.style = `background: ${board.background.data.bgColor}`;
+                break;
+            default:
+                break;
+        }
+
+        return (() => {
+            const wrapper = document.querySelector('.wrapper');
+            wrapper.style = ``;
+        })
     }, [board.background]);
 
     return (
