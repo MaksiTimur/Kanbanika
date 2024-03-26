@@ -10,6 +10,8 @@ const TaskEdit = () => {
     const dispatch = useDispatch();
 
     const handleSubmit = e => {
+        e.preventDefault();
+
         tasks.forEach(task => {
             if (task.id !== currentTask.id) return;
 
@@ -19,6 +21,9 @@ const TaskEdit = () => {
             const description = target.description.value;
 
             if (title.length === 0) return;
+            if (title.length > 24) return;
+
+            if (description.length > 160) return;
 
             dispatch(setTitle({ title, id: task.id }));
             dispatch(setDescription({ description, id: task.id }));
@@ -29,10 +34,10 @@ const TaskEdit = () => {
     return (
         <Form className="task-edit" onSubmit={e => handleSubmit(e)}>
             <label htmlFor="title">Task Title</label>
-            <input type="text" name="title" defaultValue={currentTask.title} />
+            <input type="text" name="title" minLength="1" maxLength="24" defaultValue={currentTask.title} />
 
             <label htmlFor="description">Task Description</label>
-            <textarea name="description" rows="3" defaultValue={currentTask.description}></textarea>
+            <textarea name="description" rows="4" maxLength="160" defaultValue={currentTask.description}></textarea>
 
             <button type='submit'>Confirm</button>
         </Form>

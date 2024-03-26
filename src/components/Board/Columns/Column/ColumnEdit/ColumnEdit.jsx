@@ -19,10 +19,13 @@ const ColumnEdit = () => {
     });
 
     const handleSubmit = e => {
+        e.preventDefault();
+
         const title = e.target.title.value;
         const background = e.target.background.value;
 
         if (title.length === 0) return;
+        if (title.length > 20) return;
 
         dispatch(setTitle({ title, id: column.id }));
         dispatch(setBackground({ background, id: column.id }));
@@ -41,7 +44,7 @@ const ColumnEdit = () => {
     return (
         <Form className="column-edit" onSubmit={e => handleSubmit(e)}>
             <label htmlFor="title">Column Title</label>
-            <input type="text" name="title" defaultValue={currentColumn.title} />
+            <input type="text" name="title" minLength="1" maxLength="20" defaultValue={currentColumn.title} />
 
             <label htmlFor="background">Column Background</label>
             <div className="bg-color">

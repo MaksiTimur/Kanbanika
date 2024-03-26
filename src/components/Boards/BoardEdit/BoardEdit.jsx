@@ -19,8 +19,12 @@ const BoardEdit = () => {
     });
 
     const handleSubmit = e => {
+        e.preventDefault();
+
         const title = e.target.title.value;
+
         if (title.length === 0) return;
+        if (title.length > 20) return;
 
         const typesBtns = document.querySelectorAll('.change-bg .bg-types button');
 
@@ -57,6 +61,7 @@ const BoardEdit = () => {
                 onKeyDown={e => {
                     if (e.key == "Enter") e.preventDefault()
                 }}
+                maxLength="20"
                 defaultValue={currentBoard.title}
             />
 

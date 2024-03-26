@@ -12,8 +12,7 @@ const Column = ({ data }) => {
     useEffect(() => {
         dispatch(resetShow());
 
-        const id = data.id;
-        const column = document.getElementById(id);
+        const column = document.getElementById(data.id);
 
         column.style = `background: ${data.background}`;
     }, [data.background]);
@@ -41,7 +40,7 @@ const Column = ({ data }) => {
                 break;
             case 'column':
                 if (e.currentTarget.id === dragItem.id) return;
-                
+
                 e.currentTarget.classList.add('dragging-right');
                 break;
             default:
@@ -55,13 +54,17 @@ const Column = ({ data }) => {
         switch (dragItem.type) {
             case 'task':
                 dispatch(setColumn({ task: dragItem, columnId }));
+
                 e.currentTarget.classList.remove('dragging-down');
                 e.currentTarget.classList.remove('dragging-inset');
+
                 break;
             case 'column':
-                dispatch(insertAfter({ droppedColumn: dragItem, column }))
+                dispatch(insertAfter({ droppedColumn: dragItem, column }));
+
                 e.currentTarget.classList.remove('dragging-right');
                 e.currentTarget.classList.remove('dragging-inset');
+                
                 break;
             default:
                 break;
