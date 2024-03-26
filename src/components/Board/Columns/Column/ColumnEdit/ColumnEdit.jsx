@@ -32,7 +32,7 @@ const ColumnEdit = () => {
     const resetBgColor = e => {
         e.preventDefault();
 
-        const inputColor = document.querySelector('.change-bg input');
+        const inputColor = document.querySelector('.bg-color input');
 
         inputColor.value = '#242732';
     }
@@ -44,7 +44,7 @@ const ColumnEdit = () => {
             <input type="text" name="title" defaultValue={currentColumn.title} />
 
             <label htmlFor="background">Column Background</label>
-            <div className="change-bg">
+            <div className="bg-color">
                 <button onClick={e => resetBgColor(e)}><FaRegCircleXmark /></button>
                 <input type="color" name="background" defaultValue={currentColumn.background ?? '#242732'} />
             </div>
