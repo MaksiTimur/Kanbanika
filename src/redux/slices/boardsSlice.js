@@ -11,7 +11,7 @@ export const boardsSlice = createSlice({
 			const newBoard = {
 				type: "board",
 				title: action.payload.title,
-				background: null,
+				background: { active: 'color', data: { bgUrl: null, bgColor: null } },
 				id: self.crypto.randomUUID()
 			};
 
@@ -52,10 +52,26 @@ export const boardsSlice = createSlice({
 		setBackground: (state, action) => {
 			const board = state.boards.find(board => board.id === action.payload.id)
 
-			board.background = action.payload.background;
+			switch (action.payload.type) {
+				case 'url':
+					board.background.data.bgUrl = action.payload.background;
+					break;
+				case 'color':
+					board.background.data.bgColor = action.payload.background;
+					break;
+				default:
+					break;
+			}
 
 			localStorage.setItem('boards', JSON.stringify(current(state.boards)));
-		}
+		},
+		setActiveBackground: (state, action) => {
+			const board = state.boards.find(board => board.id === action.payload.id)
+
+			board.background.active = action.payload.type;
+
+			localStorage.setItem('boards', JSON.stringify(current(state.boards)));
+		},
 	}
 });
 
@@ -65,7 +81,8 @@ export const {
 	insertAfter,
 	remove,
 	setTitle,
-	setBackground
+	setBackground,
+	setActiveBackground
 } = boardsSlice.actions;
 
 export default boardsSlice.reducer;
