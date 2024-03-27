@@ -26,3 +26,15 @@
 .task:hover {
     cursor: pointer;
 }
+
+.first-priority {
+    background: var(--first-priority-color);
+}
+
+.second-priority {
+    background: var(--second-priority-color) ;
+}
+
+.third-priority {
+    background: var(--third-priority-color);
+}

@@ -1,7 +1,7 @@
 import { Form } from 'react-router-dom';
 import './TaskEdit.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setDescription, setTitle } from '../../../../../../../redux/slices/tasksSlice';
+import { setDescription, setPriority, setTitle } from '../../../../../../../redux/slices/tasksSlice';
 import { setShow } from '../../../../../../../redux/slices/modalSlice';
 
 const TaskEdit = () => {
@@ -19,6 +19,7 @@ const TaskEdit = () => {
 
             const title = target.title.value;
             const description = target.description.value;
+            const priority = target.priority.value;
 
             if (title.length === 0) return;
             if (title.length > 24) return;
@@ -27,6 +28,7 @@ const TaskEdit = () => {
 
             dispatch(setTitle({ title, id: task.id }));
             dispatch(setDescription({ description, id: task.id }));
+            dispatch(setPriority({ priority, id: task.id }))
             dispatch(setShow({ taskEdit: false }));
         });
     }
@@ -38,6 +40,15 @@ const TaskEdit = () => {
 
             <label htmlFor="description">Task Description</label>
             <textarea name="description" rows="4" maxLength="160" defaultValue={currentTask.description}></textarea>
+
+            <label htmlFor="priority">Priority</label>
+            <select name="priority" defaultValue={currentTask.priority}>
+                <option value={null}>No priority</option>
+                <option value={1}>First</option>
+                <option value={2}>Second</option>
+                <option value={3}>Third</option>
+            </select>
+
 
             <button type='submit'>Confirm</button>
         </Form>

@@ -14,7 +14,7 @@ const Tasks = ({ data }) => {
 
         tasks.push(
             <Task
-                data={taskData}
+                taskData={taskData}
                 key={taskData.id}
                 clickHandler={id => clickHandler(id)}
             />

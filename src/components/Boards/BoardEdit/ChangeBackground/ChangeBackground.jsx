@@ -37,6 +37,8 @@ const ChangeBackground = () => {
     }
 
     const resetBgColor = e => {
+        e.preventDefault();
+
         const inputColor = document.querySelector('.bg-color input');
 
         inputColor.value = '#1f2229';
