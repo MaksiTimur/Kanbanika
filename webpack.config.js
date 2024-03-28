@@ -72,7 +72,6 @@ module.exports = (env, argv) => {
 							},
 						},
 						'postcss-loader',
-						'sass-loader',
 					],
 				},
 				{
@@ -82,7 +81,6 @@ module.exports = (env, argv) => {
 						'style-loader',
 						'css-loader',
 						'postcss-loader',
-						'sass-loader',
 					],
 				},
 			],
@@ -113,4 +111,4 @@ module.exports = (env, argv) => {
 			// })
 		],
 	}
-}
+}	
