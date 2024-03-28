@@ -64,7 +64,7 @@ const Column = ({ data }) => {
 
                 e.currentTarget.classList.remove('dragging-right');
                 e.currentTarget.classList.remove('dragging-inset');
-                
+
                 break;
             default:
                 break;
@@ -75,12 +75,19 @@ const Column = ({ data }) => {
 
     const handleDragLeave = e => {
         e.target.classList.remove('dragging-right');
+        e.currentTarget.classList.remove('dragging-right');
+
         e.target.classList.remove('dragging-inset');
+        e.currentTarget.classList.remove('dragging-inset');
     }
 
     const handleDragEnd = e => {
         e.target.classList.remove('dragging-right');
+
         e.target.classList.remove('dragging-inset');
+        e.currentTarget.classList.remove('dragging-inset');
+
+        dispatch(setDragging(false));
     }
 
     return (
