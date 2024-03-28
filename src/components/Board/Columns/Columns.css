@@ -2,7 +2,7 @@
     display: flex;
     gap: 16px;
     overflow: auto;
-    height: fit-content;
+    height: 100vh;
     overflow-y: hidden;
     margin-bottom: 8px;
 }

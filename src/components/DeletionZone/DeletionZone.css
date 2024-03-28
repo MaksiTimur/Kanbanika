@@ -2,13 +2,16 @@
     background: var(--warning-color);
     height: auto;
     margin-top: auto;
-    margin-bottom: 0;
+    margin-bottom: 8px;
     border-radius: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 16px 8px;
     transition: background-color 200ms;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 64px);
 }
 
 #deletion-zone svg {
