@@ -12,11 +12,17 @@ const Task = ({ taskData }) => {
         switch (taskData.priority) {
             case '1':
                 task.classList.add('first-priority');
+                task.classList.remove('second-priority');
+                task.classList.remove('third-priority');
                 break;
             case '2':
+                task.classList.remove('first-priority');
                 task.classList.add('second-priority');
+                task.classList.remove('third-priority');
                 break;
             case '3':
+                task.classList.remove('first-priority');
+                task.classList.remove('second-priority');
                 task.classList.add('third-priority');
                 break;
             default:
