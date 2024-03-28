@@ -8,9 +8,7 @@ export const columnsSlice = createSlice({
 			const entries = Object.entries(action.payload)[0];
 			state[entries[0]] = entries[1];
 		},
-		resetShow: state => {
-			state = {};
-		}
+		resetShow: state => ({})
 	}
 });
 

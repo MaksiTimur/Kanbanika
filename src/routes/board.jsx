@@ -71,7 +71,7 @@ const Board = () => {
             </div >
             <BoardComponent data={board} />
             <DeletionZone />
-            {showModal && <Modal onClose={() => dispatch(setShow({ boardEdit: false }))}><BoardEdit /></Modal>}
+            {showModal && <Modal onClose={() => dispatch(resetShow())}><BoardEdit /></Modal>}
         </>
     );
 }

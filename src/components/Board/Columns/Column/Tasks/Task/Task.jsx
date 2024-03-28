@@ -31,8 +31,6 @@ const Task = ({ taskData }) => {
                 task.classList.remove('third-priority');
                 break;
         }
-
-        console.log(taskData.priority, task);
     }, [taskData.priority]);
 
     const dragItem = useSelector(state => state.dragReducer).item;

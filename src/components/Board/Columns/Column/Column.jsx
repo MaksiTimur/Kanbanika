@@ -3,15 +3,13 @@ import './Column.css';
 import Tasks from './Tasks/Tasks';
 import { setColumn } from '../../../../redux/slices/tasksSlice';
 import { FaPencil } from "react-icons/fa6";
-import { resetShow, setShow } from '../../../../redux/slices/modalSlice';
+import { setShow } from '../../../../redux/slices/modalSlice';
 import { useEffect } from 'react';
 import { insertAfter, setCurrent } from '../../../../redux/slices/columnsSlice';
 import { setDraggable, setDragging } from '../../../../redux/slices/dragSlice';
 
 const Column = ({ data }) => {
     useEffect(() => {
-        dispatch(resetShow());
-
         const column = document.getElementById(data.id);
 
         column.style = `background: ${data.background}`;
