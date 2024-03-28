@@ -8,7 +8,7 @@ import {
 	redirect,
 	RouterProvider,
 } from "react-router-dom";
-import ErrorPage from './error-page';
+import ErrorPage from './routes/error-page';
 import Root from './routes/root';
 import Overview from './routes/overview';
 import Board, {
