@@ -54,9 +54,11 @@ const ChangeBackground = () => {
             <div className="change-bg">
                 <div className="bg-types">
                     <button
+                        type="button"
                         className="btn-color"
                         onClick={e => changeActive(e, 'color')}><FaPaintRoller /></button>
                     <button
+                        type="button"
                         className="btn-url"
                         onClick={e => changeActive(e, 'url')}><FaImage /></button>
                 </div>
@@ -75,9 +77,6 @@ const ChangeBackground = () => {
                     name="bgUrl"
                     placeholder="https://example.com"
                     defaultValue={board.background.data.bgUrl}
-                    onKeyDown={e => {
-                        if (e.key == "Enter") e.preventDefault()
-                    }}
                 />}
             </div>
         </>

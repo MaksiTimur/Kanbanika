@@ -53,19 +53,16 @@ const BoardEdit = () => {
     }
 
     return (
-        <Form className="board-edit" onSubmit={e => handleSubmit(e)} action=''>
+        <Form className="board-edit" onSubmit={e => handleSubmit(e)}>
             <label htmlFor="title">Board Title</label>
             <input
                 type="text"
                 name="title"
-                onKeyDown={e => {
-                    if (e.key == "Enter") e.preventDefault()
-                }}
                 maxLength="20"
                 defaultValue={currentBoard.title}
             />
 
-            <ChangeBackground></ChangeBackground>
+            <ChangeBackground />
 
             <button type='submit'>Confirm</button>
         </Form>
