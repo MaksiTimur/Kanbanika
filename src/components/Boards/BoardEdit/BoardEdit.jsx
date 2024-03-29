@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setActiveBackground, setBackground, setTitle } from '../../../redux/slices/boardsSlice';
 import { setShow } from '../../../redux/slices/modalSlice';
 import ChangeBackground from './ChangeBackground/ChangeBackground';
+import { useState } from 'react';
 
 const BoardEdit = () => {
     const boards = useSelector(state => state.boardsReducer).boards;
@@ -18,6 +19,8 @@ const BoardEdit = () => {
         board = boardData;
     });
 
+    const [activeBg, setActiveBg] = useState(board.background.active);
+
     const handleSubmit = e => {
         e.preventDefault();
 
@@ -26,21 +29,19 @@ const BoardEdit = () => {
         if (title.length === 0) return;
         if (title.length > 20) return;
 
-        const typesBtns = document.querySelectorAll('.change-bg .bg-types button');
-
-        switch (typesBtns[0].classList[1]) {
-            case 'active':
+        switch (activeBg) {
+            case 'color':
                 const bgColor = e.target.bgColor.value;
 
                 dispatch(setActiveBackground({ id: board.id, type: 'color' }));
-                dispatch(setBackground({ type: 'color', background: bgColor, id: board.id }));
+                dispatch(setBackground({ type: 'bgColor', background: bgColor, id: board.id }));
 
                 break;
-            case undefined:
+            case 'url':
                 const bgUrl = e.target.bgUrl.value;
 
                 dispatch(setActiveBackground({ id: board.id, type: 'url' }));
-                dispatch(setBackground({ type: 'url', background: bgUrl, id: board.id }));
+                dispatch(setBackground({ type: 'bgUrl', background: bgUrl, id: board.id }));
 
                 break;
             default:
@@ -62,7 +63,7 @@ const BoardEdit = () => {
                 defaultValue={currentBoard.title}
             />
 
-            <ChangeBackground />
+            <ChangeBackground activeBtn={{ activeBg, setActiveBg }} />
 
             <button type='submit'>Confirm</button>
         </Form>

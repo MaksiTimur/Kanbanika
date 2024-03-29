@@ -22,16 +22,22 @@ export const boardsSlice = createSlice({
 		insertAfter: (state, action) => {
 			const { droppedBoard, board } = action.payload;
 
-			const droppedIndex = state.boards.findIndex(stateBoard => stateBoard.id === droppedBoard.id);
-			const boardIndex = state.boards.findIndex(stateBoard => stateBoard.id === board.id);
+			let droppedIndex;
+			let boardIndex;
+
+			for (let i = 0; i < state.boards.length; i++) {
+				const currBoard = state.boards[i];
+
+				if (currBoard.id === droppedBoard.id) droppedIndex = i;
+				if (currBoard.id === board.id) boardIndex = i;
+
+				if (droppedIndex !== undefined && boardIndex !== undefined) break;
+			}
 
 			state.boards.splice(droppedIndex, 1);
 
-			if (droppedIndex > boardIndex) {
-				state.boards.splice(boardIndex + 1, 0, droppedBoard);
-			} else {
-				state.boards.splice(boardIndex, 0, droppedBoard)
-			}
+			const addition = droppedIndex > boardIndex ? 1 : 0;
+			state.boards.splice(boardIndex + addition, 0, droppedBoard);
 
 			localStorage.setItem('boards', JSON.stringify(current(state.boards)));
 		},
@@ -52,16 +58,10 @@ export const boardsSlice = createSlice({
 		setBackground: (state, action) => {
 			const board = state.boards.find(board => board.id === action.payload.id)
 
-			switch (action.payload.type) {
-				case 'url':
-					board.background.data.bgUrl = action.payload.background;
-					break;
-				case 'color':
-					board.background.data.bgColor = action.payload.background;
-					break;
-				default:
-					break;
-			}
+			const type = action.payload.type;
+			const bg = action.payload.background;
+
+			board.background.data[type] = bg;
 
 			localStorage.setItem('boards', JSON.stringify(current(state.boards)));
 		},

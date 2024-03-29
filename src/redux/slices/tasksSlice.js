@@ -24,20 +24,24 @@ export const tasksSlice = createSlice({
 		insertAfter: (state, action) => {
 			const { droppedTask, task } = action.payload;
 
-			state.tasks.sort((a, b) => a.column.localeCompare(b.column));
+			let droppedIndex;
+			let taskIndex;
 
-			const droppedIndex = state.tasks.findIndex(stateTask => stateTask.id === droppedTask.id);
-			const taskIndex = state.tasks.findIndex(stateTask => stateTask.id === task.id);
+			for (let i = 0; i < state.tasks.length; i++) {
+				const currTask = state.tasks[i];
+
+				if (currTask.id === droppedTask.id) droppedIndex = i;
+				if (currTask.id === task.id) taskIndex = i;
+
+				if (droppedIndex !== undefined && taskIndex !== undefined) break;
+			}
 
 			state.tasks[droppedIndex].column = task.column;
 
 			state.tasks.splice(droppedIndex, 1);
 
-			if (droppedIndex > taskIndex) {
-				state.tasks.splice(taskIndex + 1, 0, droppedTask);
-			} else {
-				state.tasks.splice(taskIndex, 0, droppedTask)
-			}
+			const addition = droppedIndex > taskIndex ? 1 : 0;
+			state.tasks.splice(taskIndex + addition, 0, droppedTask);
 
 			localStorage.setItem('tasks', JSON.stringify(current(state.tasks)));
 		},

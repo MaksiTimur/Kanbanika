@@ -3,12 +3,12 @@ import { FaImage } from "react-icons/fa6";
 import { FaPaintRoller } from "react-icons/fa6";
 import './ChangeBackground.css';
 import { FaRegCircleXmark } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-const ChangeBackground = () => {
+const ChangeBackground = ({ activeBtn }) => {
     const boardsData = useSelector(state => state.boardsReducer);
     const board = boardsData.current;
-    const [activeBg, setActiveBg] = useState(board.background.active);
+    const { activeBg, setActiveBg } = activeBtn;
     let isActiveColorBg = activeBg === 'color';
 
     const switchBtnClasses = type => {
@@ -19,10 +19,12 @@ const ChangeBackground = () => {
             case 'url':
                 btnColor.classList.remove('active');
                 btnUrl.classList.add('active');
+
                 break;
             case 'color':
                 btnColor.classList.add('active');
                 btnUrl.classList.remove('active');
+
                 break;
             default:
                 break;
