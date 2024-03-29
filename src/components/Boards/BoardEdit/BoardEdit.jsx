@@ -40,8 +40,13 @@ const BoardEdit = () => {
             case 'url':
                 const bgUrl = e.target.bgUrl.value;
 
-                dispatch(setActiveBackground({ id: board.id, type: 'url' }));
-                dispatch(setBackground({ type: 'bgUrl', background: bgUrl, id: board.id }));
+                const image = new Image();
+                image.src = bgUrl;
+
+                image.addEventListener('load', () => {
+                    dispatch(setActiveBackground({ id: board.id, type: 'url' }));
+                    dispatch(setBackground({ type: 'bgUrl', background: bgUrl, id: board.id }));
+                });
 
                 break;
             default:
