@@ -29,3 +29,9 @@ header .icon:hover {
     height: 24px;
     cursor: pointer;
 }
+
+@media screen and (width <= 990px) {
+    header {
+        padding: 8px 16px;
+    }
+}

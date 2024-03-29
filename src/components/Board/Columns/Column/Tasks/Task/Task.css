@@ -32,9 +32,21 @@
 }
 
 .second-priority {
-    background: var(--second-priority-color) ;
+    background: var(--second-priority-color);
 }
 
 .third-priority {
     background: var(--third-priority-color);
+}
+
+@media screen and (width <= 990px) {
+    .task p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (width <= 728px) {
+    .task p {
+        font-size: 13px;
+    }
 }

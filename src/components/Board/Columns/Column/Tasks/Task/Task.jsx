@@ -94,8 +94,8 @@ const Task = ({ taskData }) => {
             onDragLeave={e => handleDragLeave(e)}
             onDrop={e => handleDrop(e, taskData)}
         >
-            <h3 className='task-name'>{taskData.title}</h3>
-            <p className="task-description">{taskData.description ?? ''}</p>
+            <h3>{taskData.title}</h3>
+            <p>{taskData.description ?? ''}</p>
         </div>
     )
 }

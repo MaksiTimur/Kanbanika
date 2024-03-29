@@ -7,3 +7,15 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+@media screen and (width <= 990px) {
+    .boards {
+        grid-template-columns: repeat(2, calc(50% - 10px));
+    }
+}
+
+@media screen and (width <= 728px) {
+    .boards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
