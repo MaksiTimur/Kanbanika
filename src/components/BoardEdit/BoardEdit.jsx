@@ -1,10 +1,11 @@
 import { Form } from 'react-router-dom';
-import './BoardEdit.css'
+import './ChangeBackground/ChangeBackground'
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveBackground, setBackground, setTitle } from '../../../redux/slices/boardsSlice';
-import { setShow } from '../../../redux/slices/modalSlice';
+import { setActiveBackground, setBackground, setTitle } from '../../redux/slices/boardsSlice';
+import { setShow } from '../../redux/slices/modalSlice';
 import ChangeBackground from './ChangeBackground/ChangeBackground';
 import { useState } from 'react';
+import './BoardEdit.css';
 
 const BoardEdit = () => {
     const boards = useSelector(state => state.boardsReducer).boards;

@@ -4,7 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import { resetShow, setShow } from "../redux/slices/modalSlice";
 import Modal from "../components/Modal/Modal";
 import { FaPencil } from "react-icons/fa6";
-import BoardEdit from "../components/Boards/BoardEdit/BoardEdit";
+import BoardEdit from "../components/BoardEdit/BoardEdit";
 import { useEffect } from "react";
 import DeletionZone from "../components/DeletionZone/DeletionZone";
 import { setCurrent } from "../redux/slices/boardsSlice";

@@ -1,3 +1,5 @@
+@import url(/src/colors.css);
+
 .change-bg {
     display: flex;
     flex-direction: column;

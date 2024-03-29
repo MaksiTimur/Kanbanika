@@ -8,7 +8,7 @@ import { create } from '../../redux/slices/boardsSlice';
 import DeletionZone from '../DeletionZone/DeletionZone';
 import Modal from '../Modal/Modal';
 import { resetShow } from '../../redux/slices/modalSlice';
-import BoardEdit from './BoardEdit/BoardEdit';
+import BoardEdit from '../BoardEdit/BoardEdit';
 import { useEffect } from 'react';
 
 const Boards = () => {
