@@ -14,6 +14,7 @@ import Overview from './routes/overview';
 import Board, {
 	loader as boardLoader
 } from './routes/board';
+import { action as deleteAction } from './routes/delete';
 const rootContainer = document.querySelector('#root');
 
 if (rootContainer === null) throw new Error('Can\'t find root container');
@@ -38,7 +39,12 @@ const router = createBrowserRouter([
 				element: <Board />,
 				loader: boardLoader,
 			},
-
+			{
+				path: "boards/:boardId/delete",
+				action: deleteAction,
+				loader: () => redirect('/boards'),
+				element: null,
+			},
 		]
 	}
 ]);
