@@ -62,7 +62,7 @@ export const tasksSlice = createSlice({
 			const deletionIndexes = [];
 
 			for (let i = 0; i < state.tasks.length; i++) {
-				console.log(state.tasks[i].column in columns, columns);
+				
 				if (state.tasks[i].column in columns) deletionIndexes.push(i);
 			}
 

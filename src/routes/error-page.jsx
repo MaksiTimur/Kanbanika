@@ -16,7 +16,7 @@ const ErrorPage = () => {
                     <i>{error.statusText || error.message}</i>
                 </p>
             </div>
-            <button onClick={() => navigate('/')}>Go Home <FaCircleArrowRight /></button>
+            <button onClick={() => navigate('/boards')}>Go Home <FaCircleArrowRight /></button>
         </div>
     );
 }

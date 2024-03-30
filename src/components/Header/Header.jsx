@@ -5,7 +5,7 @@ import { FaGithub } from "react-icons/fa6";
 const Header = () => {
     return (
         <header>
-            <NavLink className="logo" to={'/'}>Kanbanika</NavLink>
+            <NavLink className="logo" to={'/boards'}>Kanbanika</NavLink>
             <a className='icon-link' href='https://github.com/MaksiTimur/Kanbanika' target='_blank'>
                 <FaGithub className='icon' />
             </a>
