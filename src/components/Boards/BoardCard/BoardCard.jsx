@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './BoardCard.css';
 import { insertAfter, setCurrent } from '../../../redux/slices/boardsSlice';
-import { setDraggable, setDragging } from '../../../redux/slices/dragSlice';
+import { setDraggable, setIsDragging } from '../../../redux/slices/dragSlice';
 import { FaPencil } from "react-icons/fa6";
 import { setShow } from '../../../redux/slices/modalSlice';
 
@@ -11,7 +11,7 @@ const BoardCard = ({ data, onClick }) => {
 
     const handleDragStart = (e, data) => {
         dispatch(setDraggable(data));
-        dispatch(setDragging(true));
+        dispatch(setIsDragging(true));
     };
 
     const handleDrop = (e, board) => {
@@ -22,13 +22,13 @@ const BoardCard = ({ data, onClick }) => {
         if (droppedBoard.id === board.id) return;
 
         dispatch(insertAfter({ droppedBoard, board }));
-        dispatch(setDragging(false));
+        dispatch(setIsDragging(false));
     };
 
     const handleDragEnd = e => {
         e.currentTarget.classList.remove('dragging-right');
 
-        dispatch(setDragging(false));
+        dispatch(setIsDragging(false));
     };
 
     const handleDragOver = e => {

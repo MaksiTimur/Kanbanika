@@ -7,7 +7,7 @@ export const dragSlice = createSlice({
 		setDraggable: (state, action) => {
             state.item = action.payload;
 		},
-        setDragging:  (state, action) => {
+        setIsDragging:  (state, action) => {
             state.isDragging = action.payload;
 		}
 	}
@@ -15,7 +15,7 @@ export const dragSlice = createSlice({
 
 export const {
 	setDraggable,
-    setDragging
+    setIsDragging
 } = dragSlice.actions;
 
 export default dragSlice.reducer;

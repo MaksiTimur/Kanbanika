@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './Task.css';
 import { insertAfter, setCurrent } from '../../../../../../redux/slices/tasksSlice';
-import { setDraggable, setDragging } from '../../../../../../redux/slices/dragSlice';
+import { setDraggable, setIsDragging } from '../../../../../../redux/slices/dragSlice';
 import { setShow } from '../../../../../../redux/slices/modalSlice';
 import { useEffect } from 'react';
 
@@ -37,7 +37,7 @@ const Task = ({ taskData }) => {
     const dispatch = useDispatch();
 
     const handleDragStart = (e, task) => {
-        dispatch(setDragging(true));
+        dispatch(setIsDragging(true));
         dispatch(setDraggable(task));
     }
 
@@ -53,7 +53,7 @@ const Task = ({ taskData }) => {
         if (dragItem.id === task.id) return;
 
         dispatch(insertAfter({ droppedTask: dragItem, task }));
-        dispatch(setDragging(false));
+        dispatch(setIsDragging(false));
     }
 
     const handleDragEnd = (e) => {
@@ -61,7 +61,7 @@ const Task = ({ taskData }) => {
         e.currentTarget.classList.remove('dragging-down');
         e.currentTarget.classList.remove('dragging-inset');
 
-        dispatch(setDragging(false));
+        dispatch(setIsDragging(false));
     }
 
     const handleDragOver = e => {

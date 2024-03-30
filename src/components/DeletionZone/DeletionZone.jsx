@@ -4,7 +4,7 @@ import { FaTrashCan } from "react-icons/fa6";
 import { removeByColumns as removeTasksByColumns, remove as removeTask } from '../../redux/slices/tasksSlice';
 import { removeByBoard as removeColumnsByBoard, remove as removeColumn } from '../../redux/slices/columnsSlice';
 import { remove as removeBoard } from '../../redux/slices/boardsSlice';
-import { setDragging } from '../../redux/slices/dragSlice';
+import { setIsDragging } from '../../redux/slices/dragSlice';
 
 const DeletionZone = () => {
     const dragData = useSelector(state => state.dragReducer);
@@ -54,7 +54,7 @@ const DeletionZone = () => {
                 break;
         }
 
-        dispatch(setDragging(false));
+        dispatch(setIsDragging(false));
     }
 
     const handleDragLeave = e => {

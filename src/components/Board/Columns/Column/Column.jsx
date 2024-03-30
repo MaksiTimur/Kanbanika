@@ -6,7 +6,7 @@ import { FaPencil } from "react-icons/fa6";
 import { setShow } from '../../../../redux/slices/modalSlice';
 import { useEffect } from 'react';
 import { insertAfter, setCurrent } from '../../../../redux/slices/columnsSlice';
-import { setDraggable, setDragging } from '../../../../redux/slices/dragSlice';
+import { setDraggable, setIsDragging } from '../../../../redux/slices/dragSlice';
 
 const Column = ({ data }) => {
     useEffect(() => {
@@ -21,7 +21,7 @@ const Column = ({ data }) => {
     const handleDragStart = (e, column) => {
         if (e.target.className !== 'column') return;
 
-        dispatch(setDragging(true));
+        dispatch(setIsDragging(true));
         dispatch(setDraggable(column));
     }
 
@@ -68,7 +68,7 @@ const Column = ({ data }) => {
                 break;
         }
 
-        dispatch(setDragging(false));
+        dispatch(setIsDragging(false));
     }
 
     const handleDragLeave = e => {
@@ -85,7 +85,7 @@ const Column = ({ data }) => {
         e.target.classList.remove('dragging-inset');
         e.currentTarget.classList.remove('dragging-inset');
 
-        dispatch(setDragging(false));
+        dispatch(setIsDragging(false));
     }
 
     return (
