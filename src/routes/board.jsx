@@ -26,6 +26,8 @@ const Board = () => {
     useEffect(() => {
         dispatch(resetShow());
 
+        if (board === undefined) return;
+
         const wrapper = document.querySelector('.wrapper');
 
         switch (board.background.active) {
@@ -48,7 +50,9 @@ const Board = () => {
             const wrapper = document.querySelector('.wrapper');
             wrapper.style = ``;
         })
-    }, [board.background]);
+    }, [board?.background]);
+
+    if (board === undefined) return;
 
     return (
         <>

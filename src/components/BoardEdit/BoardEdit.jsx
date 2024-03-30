@@ -10,7 +10,7 @@ import './BoardEdit.css';
 import { removeByColumns as removeTasksByColumns } from '../../redux/slices/tasksSlice';
 import { removeByBoard as removeColumnsByBoard } from '../../redux/slices/columnsSlice';
 
-const BoardEdit = ({ isNeedDeleteBtn }) => {
+const BoardEdit = () => {
     const currentBoard = useSelector(state => state.boardsReducer).current;
     const columns = useSelector(state => state.columnsReducer).columns;
 
@@ -69,8 +69,6 @@ const BoardEdit = ({ isNeedDeleteBtn }) => {
         dispatch(resetShow());
     }
 
-    console.log(isNeedDeleteBtn);
-
     return (
         <>
             <Form className="board-edit" onSubmit={e => handleSubmit(e)}>
@@ -87,9 +85,9 @@ const BoardEdit = ({ isNeedDeleteBtn }) => {
 
                 <button type='submit'>Confirm</button>
             </Form>
-            {isNeedDeleteBtn && <Form method='post' action={`/boards/${currentBoard.id}/delete`} onSubmit={deleteContent}>
+            <Form method='post' action={`/boards/${currentBoard.id}/delete`} onSubmit={deleteContent}>
                 <button className='delete-btn' type='submit'><FaTrashCan /></button>
-            </Form>}
+            </Form>
         </>
     );
 }
