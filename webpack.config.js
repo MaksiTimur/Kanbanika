@@ -87,9 +87,6 @@ module.exports = (env, argv) => {
 		},
 		plugins: [
 			new HTMLWebpackPlugin({
-				favicon: "./public/assets/favicon.png"
-			}),
-			new HTMLWebpackPlugin({
 				template: './public/index.html',
 			}),
 			// new HTMLWebpackPlugin({
