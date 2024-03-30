@@ -32,8 +32,12 @@ const DeletionZone = () => {
                 break;
 
             case 'column':
+                const columnId = element.id;
+                const column = {};
+                column[columnId] = null;
+
                 dispatch(removeColumn(element));
-                dispatch(removeTasksByColumns(element));
+                dispatch(removeTasksByColumns(column));
                 break;
 
             case 'board':
@@ -42,7 +46,7 @@ const DeletionZone = () => {
                 columns.forEach(column => {
                     if (column.board !== element.id) return;
 
-                    boardColumns[column.id] = column.id;
+                    boardColumns[column.id] = null;
                 });
 
                 dispatch(removeBoard(element));
