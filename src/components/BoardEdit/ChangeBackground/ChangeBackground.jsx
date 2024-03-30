@@ -8,8 +8,9 @@ import { useEffect } from "react";
 const ChangeBackground = ({ activeBtn }) => {
     const boardsData = useSelector(state => state.boardsReducer);
     const board = boardsData.current;
+
     const { activeBg, setActiveBg } = activeBtn;
-    let isActiveColorBg = activeBg === 'color';
+    const isActiveColorBg = activeBg === 'color';
 
     const switchBtnClasses = type => {
         const btnColor = document.querySelector(`.bg-types .btn-color`);

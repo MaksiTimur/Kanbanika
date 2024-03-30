@@ -17,15 +17,10 @@ const Board = () => {
     const boardsData = useSelector(state => state.boardsReducer).boards;
     const id = useLoaderData();
     const dispatch = useDispatch();
-    let board = null;
+
+    const board = boardsData.find(boardData => boardData.id === id);
 
     const showModal = useSelector(state => state.modalReducer).boardEdit;
-
-    boardsData.forEach(boardData => {
-        if (boardData.id != id) return;
-
-        board = boardData;
-    });
 
     // Setting board's background
     useEffect(() => {
@@ -70,7 +65,9 @@ const Board = () => {
                 </button>
             </div >
             <BoardComponent data={board} />
+
             <DeletionZone />
+
             {showModal && <Modal onClose={() => dispatch(resetShow())}><BoardEdit /></Modal>}
         </>
     );

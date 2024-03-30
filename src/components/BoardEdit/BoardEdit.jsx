@@ -1,26 +1,22 @@
-import { Form } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import './ChangeBackground/ChangeBackground'
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveBackground, setBackground, setTitle } from '../../redux/slices/boardsSlice';
-import { setShow } from '../../redux/slices/modalSlice';
+import { resetShow, setShow } from '../../redux/slices/modalSlice';
 import ChangeBackground from './ChangeBackground/ChangeBackground';
 import { useState } from 'react';
+import { FaTrashCan } from "react-icons/fa6";
 import './BoardEdit.css';
+import { removeByColumns as removeTasksByColumns } from '../../redux/slices/tasksSlice';
+import { removeByBoard as removeColumnsByBoard } from '../../redux/slices/columnsSlice';
 
-const BoardEdit = () => {
-    const boards = useSelector(state => state.boardsReducer).boards;
+const BoardEdit = ({ isNeedDeleteBtn }) => {
     const currentBoard = useSelector(state => state.boardsReducer).current;
+    const columns = useSelector(state => state.columnsReducer).columns;
+
     const dispatch = useDispatch();
 
-    let board = null;
-
-    boards.forEach(boardData => {
-        if (boardData.id !== currentBoard.id) return;
-
-        board = boardData;
-    });
-
-    const [activeBg, setActiveBg] = useState(board.background.active);
+    const [activeBg, setActiveBg] = useState(currentBoard.background.active);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -34,8 +30,8 @@ const BoardEdit = () => {
             case 'color':
                 const bgColor = e.target.bgColor.value;
 
-                dispatch(setActiveBackground({ id: board.id, type: 'color' }));
-                dispatch(setBackground({ type: 'bgColor', background: bgColor, id: board.id }));
+                dispatch(setActiveBackground({ id: currentBoard.id, type: 'color' }));
+                dispatch(setBackground({ type: 'bgColor', background: bgColor, id: currentBoard.id }));
 
                 break;
             case 'url':
@@ -45,8 +41,8 @@ const BoardEdit = () => {
                 image.src = bgUrl;
 
                 image.addEventListener('load', () => {
-                    dispatch(setActiveBackground({ id: board.id, type: 'url' }));
-                    dispatch(setBackground({ type: 'bgUrl', background: bgUrl, id: board.id }));
+                    dispatch(setActiveBackground({ id: currentBoard.id, type: 'url' }));
+                    dispatch(setBackground({ type: 'bgUrl', background: bgUrl, id: currentBoard.id }));
                 });
 
                 break;
@@ -54,25 +50,47 @@ const BoardEdit = () => {
                 break;
         }
 
-        dispatch(setTitle({ title, id: board.id }));
-
+        dispatch(setTitle({ title, id: currentBoard.id }));
         dispatch(setShow({ boardEdit: false }));
     }
 
+    const deleteContent = () => {
+        const boardColumns = {};
+
+        columns.forEach(column => {
+            if (column.board !== currentBoard.id) return;
+
+            boardColumns[column.id] = null;
+        });
+
+        dispatch(removeColumnsByBoard(currentBoard));
+        dispatch(removeTasksByColumns(boardColumns));
+
+        dispatch(resetShow());
+    }
+
+    console.log(isNeedDeleteBtn);
+
     return (
-        <Form className="board-edit" onSubmit={e => handleSubmit(e)}>
-            <label htmlFor="title">Board Title</label>
-            <input
-                type="text"
-                name="title"
-                maxLength="20"
-                defaultValue={currentBoard.title}
-            />
+        <>
+            <Form className="board-edit" onSubmit={e => handleSubmit(e)}>
+                <label htmlFor="title">Board Title</label>
+                <input
+                    required
+                    type="text"
+                    name="title"
+                    maxLength="20"
+                    defaultValue={currentBoard.title}
+                />
 
-            <ChangeBackground activeBtn={{ activeBg, setActiveBg }} />
+                <ChangeBackground activeBtn={{ activeBg, setActiveBg }} />
 
-            <button type='submit'>Confirm</button>
-        </Form>
+                <button type='submit'>Confirm</button>
+            </Form>
+            {isNeedDeleteBtn && <Form method='post' action={`/boards/${currentBoard.id}/delete`} onSubmit={deleteContent}>
+                <button className='delete-btn' type='submit'><FaTrashCan /></button>
+            </Form>}
+        </>
     );
 }
 export default BoardEdit;

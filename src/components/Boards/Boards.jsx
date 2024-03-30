@@ -67,8 +67,10 @@ const Boards = () => {
                     onClick={createTemplateBoard}
                 />
             </div>
+            
             <DeletionZone />
-            {showModal && <Modal onClose={handleClose}><BoardEdit /></Modal>}
+
+            {showModal && <Modal onClose={handleClose}><BoardEdit isNeedDeleteBtn={true} /></Modal>}
         </>
     )
 }

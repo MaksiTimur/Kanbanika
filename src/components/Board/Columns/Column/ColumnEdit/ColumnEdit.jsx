@@ -12,13 +12,7 @@ const ColumnEdit = () => {
     const currentColumn = useSelector(state => state.columnsReducer).current;
     const dispatch = useDispatch();
 
-    let column = null;
-
-    columns.forEach(columnData => {
-        if (columnData.id !== currentColumn.id) return;
-
-        column = columnData;
-    });
+    const column = columns.find(column => column.id === currentColumn.id);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -57,11 +51,11 @@ const ColumnEdit = () => {
         <>
             <Form className="column-edit" onSubmit={e => handleSubmit(e)}>
                 <label htmlFor="title">Column Title</label>
-                <input type="text" name="title" minLength="1" maxLength="20" defaultValue={currentColumn.title} />
+                <input required type="text" name="title" minLength="1" maxLength="20" defaultValue={currentColumn.title} />
 
                 <label htmlFor="background">Column Background</label>
                 <div className="bg-color">
-                    <button onClick={e => resetBgColor(e)}><FaRegCircleXmark /></button>
+                    <button type='button' onClick={e => resetBgColor(e)}><FaRegCircleXmark /></button>
                     <input type="color" name="background" defaultValue={currentColumn.background ?? '#242732'} />
                 </div>
 

@@ -44,7 +44,7 @@ const TaskEdit = () => {
         <>
             <Form className="task-edit" onSubmit={e => handleSubmit(e)}>
                 <label htmlFor="title">Task Title</label>
-                <input type="text" name="title" minLength="1" maxLength="24" defaultValue={currentTask.title} />
+                <input required type="text" name="title" minLength="1" maxLength="24" defaultValue={currentTask.title} />
 
                 <label htmlFor="description">Task Description</label>
                 <textarea name="description" rows="4" maxLength="160" defaultValue={currentTask.description}></textarea>
