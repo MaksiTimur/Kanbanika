@@ -1,9 +1,11 @@
 import { Form } from 'react-router-dom';
 import './ColumnEdit.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setBackground, setTitle } from '../../../../../redux/slices/columnsSlice';
-import { setShow } from '../../../../../redux/slices/modalSlice';
+import { remove as removeColumn, setBackground, setTitle } from '../../../../../redux/slices/columnsSlice';
+import { resetShow, setShow } from '../../../../../redux/slices/modalSlice';
 import { FaRegCircleXmark } from "react-icons/fa6";
+import { FaTrashCan } from "react-icons/fa6";
+import { removeByColumns as removeTasksByColumns } from '../../../../../redux/slices/tasksSlice';
 
 const ColumnEdit = () => {
     const columns = useSelector(state => state.columnsReducer).columns;
@@ -40,20 +42,33 @@ const ColumnEdit = () => {
         inputColor.value = '#242732';
     }
 
+    const deleteColumn = () => {
+        const columnId = currentColumn.id;
+        const column = {};
+        column[columnId] = null;
+
+        dispatch(removeColumn(currentColumn));
+        dispatch(removeTasksByColumns(column));
+
+        dispatch(resetShow());
+    }
 
     return (
-        <Form className="column-edit" onSubmit={e => handleSubmit(e)}>
-            <label htmlFor="title">Column Title</label>
-            <input type="text" name="title" minLength="1" maxLength="20" defaultValue={currentColumn.title} />
+        <>
+            <Form className="column-edit" onSubmit={e => handleSubmit(e)}>
+                <label htmlFor="title">Column Title</label>
+                <input type="text" name="title" minLength="1" maxLength="20" defaultValue={currentColumn.title} />
 
-            <label htmlFor="background">Column Background</label>
-            <div className="bg-color">
-                <button onClick={e => resetBgColor(e)}><FaRegCircleXmark /></button>
-                <input type="color" name="background" defaultValue={currentColumn.background ?? '#242732'} />
-            </div>
+                <label htmlFor="background">Column Background</label>
+                <div className="bg-color">
+                    <button onClick={e => resetBgColor(e)}><FaRegCircleXmark /></button>
+                    <input type="color" name="background" defaultValue={currentColumn.background ?? '#242732'} />
+                </div>
 
-            <button type='submit'>Confirm</button>
-        </Form>
+                <button type='submit'>Confirm</button>
+            </Form>
+            <button className='delete-btn' type='button' onClick={deleteColumn}><FaTrashCan /></button>
+        </>
     );
 }
 export default ColumnEdit;

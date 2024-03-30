@@ -1,8 +1,9 @@
 import { Form } from 'react-router-dom';
 import './TaskEdit.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setDescription, setPriority, setTitle } from '../../../../../../../redux/slices/tasksSlice';
-import { setShow } from '../../../../../../../redux/slices/modalSlice';
+import { remove as removeTask, setDescription, setPriority, setTitle } from '../../../../../../../redux/slices/tasksSlice';
+import { resetShow, setShow } from '../../../../../../../redux/slices/modalSlice';
+import { FaTrashCan } from "react-icons/fa6";
 
 const TaskEdit = () => {
     const tasks = useSelector(state => state.tasksReducer).tasks;
@@ -33,25 +34,33 @@ const TaskEdit = () => {
         });
     }
 
+    const deleteTask = () => {
+        dispatch(removeTask(currentTask));
+
+        dispatch(resetShow());
+    }
+
     return (
-        <Form className="task-edit" onSubmit={e => handleSubmit(e)}>
-            <label htmlFor="title">Task Title</label>
-            <input type="text" name="title" minLength="1" maxLength="24" defaultValue={currentTask.title} />
+        <>
+            <Form className="task-edit" onSubmit={e => handleSubmit(e)}>
+                <label htmlFor="title">Task Title</label>
+                <input type="text" name="title" minLength="1" maxLength="24" defaultValue={currentTask.title} />
 
-            <label htmlFor="description">Task Description</label>
-            <textarea name="description" rows="4" maxLength="160" defaultValue={currentTask.description}></textarea>
+                <label htmlFor="description">Task Description</label>
+                <textarea name="description" rows="4" maxLength="160" defaultValue={currentTask.description}></textarea>
 
-            <label htmlFor="priority">Priority</label>
-            <select name="priority" defaultValue={currentTask.priority}>
-                <option value={null}>No priority</option>
-                <option value={1}>First</option>
-                <option value={2}>Second</option>
-                <option value={3}>Third</option>
-            </select>
+                <label htmlFor="priority">Priority</label>
+                <select name="priority" defaultValue={currentTask.priority}>
+                    <option value={null}>No priority</option>
+                    <option value={1}>First</option>
+                    <option value={2}>Second</option>
+                    <option value={3}>Third</option>
+                </select>
 
-
-            <button type='submit'>Confirm</button>
-        </Form>
+                <button type='submit'>Confirm</button>
+            </Form>
+            <button className='delete-btn' type='button' onClick={deleteTask}><FaTrashCan /></button>
+        </>
     );
 }
 export default TaskEdit;
