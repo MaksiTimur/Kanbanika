@@ -8,12 +8,16 @@ export const columnsSlice = createSlice({
 			state.current = action.payload;
 		},
 		create: (state, action) => {
+			const title = action.payload?.title ?? 'New Task';
+			const id = action.payload?.id ?? self.crypto.randomUUID();
+			const board = action.payload?.board ?? null;
+
 			const newColumn = {
 				type: "column",
-				title: action.payload.title,
+				title,
 				background: null,
-				id: self.crypto.randomUUID(),
-				board: action.payload.board
+				id,
+				board
 			};
 
 			state.columns.push(newColumn);

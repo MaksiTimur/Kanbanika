@@ -8,12 +8,17 @@ export const tasksSlice = createSlice({
 			state.current = action.payload;
 		},
 		create: (state, action) => {
+			const title = action.payload?.title ?? 'New Task';
+			const id = action.payload?.id ?? self.crypto.randomUUID();
+			const description = action.payload?.description ?? null;
+			const column = action.payload?.column ?? null;
+
 			const newTask = {
 				type: "task",
-				title: action.payload.title,
-				description: null,
-				id: self.crypto.randomUUID(),
-				column: action.payload.column,
+				title,
+				description,
+				id,
+				column,
 				priority: null
 			};
 

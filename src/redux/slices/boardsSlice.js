@@ -8,11 +8,14 @@ export const boardsSlice = createSlice({
 			state.current = action.payload;
 		},
 		create: (state, action) => {
+			const title = action.payload?.title ?? 'New Board';
+			const id = action.payload?.id ?? self.crypto.randomUUID();
+
 			const newBoard = {
 				type: "board",
-				title: action.payload.title,
+				title,
 				background: { active: 'color', data: { bgUrl: null, bgColor: null } },
-				id: self.crypto.randomUUID()
+				id
 			};
 
 			state.boards.push(newBoard);
