@@ -97,18 +97,18 @@ module.exports = (env, argv) => {
 			new ProvidePlugin({
 				React: 'react',
 			}),
-			// new DefinePlugin({
-			// 	PROJECT_NAME: `"${projectName}"`,
-			// 	ASSETS_PATH: `"${projectName}/assets"`,
-			// }),
-			// new CopyWebpackPlugin({
-			// 	patterns: [
-			// 		{
-			// 			from: './public/assets/images',
-			// 			to: 'assets/images'
-			// 		}
-			// 	]
-			// })
+			new DefinePlugin({
+				PROJECT_NAME: `"${projectName}"`,
+				ASSETS_PATH: `"${projectName}/assets"`,
+			}),
+			new CopyWebpackPlugin({
+				patterns: [
+					{
+						from: './public/assets/images',
+						to: 'assets/images'
+					}
+				]
+			})
 		],
 	}
 }	
