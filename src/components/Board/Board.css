@@ -23,3 +23,24 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+@media screen and (width <= 990px) {
+    .board-title {
+        gap: 6px;
+    }
+
+    .board-title button {
+        margin-top: 2px;
+    }
+}
+
+@media screen and (width <= 728px) {
+    .board-title {
+        gap: 4px;
+    }
+
+    .board-title button svg {
+        width: 16px;
+        height: 16px;
+    }
+}
