@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <header>
             <NavLink className="logo" to={'/boards'}>Kanbanika</NavLink>
-            <a className='icon-link' href='https://github.com/MaksiTimur/Kanbanika' target='_blank'>
+            <a className='icon-link' aria-label='Open GitHub repository' href='https://github.com/MaksiTimur/Kanbanika' target='_blank'>
                 <FaGithub className='icon' />
             </a>
         </header>
