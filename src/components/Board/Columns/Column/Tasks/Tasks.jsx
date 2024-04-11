@@ -1,31 +1,30 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Task from './Task/Task';
 import { FaCirclePlus } from "react-icons/fa6";
 import { create } from '../../../../../redux/slices/tasksSlice';
 import './Tasks.css'
 
-const Tasks = ({ data }) => {
-    const tasksData = useSelector(state => state.tasksReducer).tasks;
-    const tasks = Array(tasksData.length);
+const Tasks = ({ data, tasks }) => {
     const dispatch = useDispatch();
 
-    tasksData.forEach(taskData => {
-        if (taskData.column !== data.id) return;
+    const tasksComponents = Array(tasks?.length ?? 0);
 
-        tasks.push(
-            <Task
-                taskData={taskData}
-                key={taskData.id}
-                clickHandler={id => clickHandler(id)}
-            />
-        )
-    });
+    if (tasks) {
+        tasks.forEach(task => {
+            tasksComponents.push(
+                <Task
+                    taskData={task}
+                    key={task.id}
+                    clickHandler={id => clickHandler(id)}
+                />
+            );
+        });
+    }
 
     return (
         <div className="tasks-wrapper">
             <div className='tasks'>
-                {tasks}
-
+                {tasksComponents}
             </div>
             <button
                 id='create-task'

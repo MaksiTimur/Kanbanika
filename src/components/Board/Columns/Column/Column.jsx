@@ -8,12 +8,12 @@ import { useEffect } from 'react';
 import { insertAfter, setCurrent } from '../../../../redux/slices/columnsSlice';
 import { setDraggable, setIsDragging } from '../../../../redux/slices/dragSlice';
 
-const Column = ({ data }) => {
+const Column = ({ columnData, tasks }) => {
     useEffect(() => {
-        const column = document.getElementById(data.id);
+        const column = document.getElementById(columnData.id);
 
-        column.style = `background: ${data.background}`;
-    }, [data.background]);
+        column.style = `background: ${columnData.background}`;
+    }, [columnData.background]);
 
     const dragItem = useSelector(state => state.dragReducer).item;
     const dispatch = useDispatch();
@@ -91,24 +91,24 @@ const Column = ({ data }) => {
     return (
         <div
             className='column'
-            id={data.id}
+            id={columnData.id}
             draggable
-            onDrag={e => handleDragStart(e, data)}
+            onDrag={e => handleDragStart(e, columnData)}
             onDragOver={e => handleDragOver(e)}
-            onDrop={e => handleDrop(e, data)}
+            onDrop={e => handleDrop(e, columnData)}
             onDragLeave={e => handleDragLeave(e)}
             onDragEnd={e => handleDragEnd(e)}
         >
             <div className="column-header">
-                <h2>{data.title}</h2>
+                <h2>{columnData.title}</h2>
                 <button onClick={() => {
-                    dispatch(setCurrent(data));
+                    dispatch(setCurrent(columnData));
                     dispatch(setShow({ columnEdit: true }));
                 }}>
                     <FaPencil />
                 </button>
             </div>
-            <Tasks data={data} />
+            <Tasks data={columnData} tasks={tasks} />
         </div >
     )
 }

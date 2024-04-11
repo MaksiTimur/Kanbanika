@@ -16,12 +16,24 @@ const Columns = ({ data }) => {
     const showColumnModal = useSelector(state => state.modalReducer).columnEdit;
     const showTaskModal = useSelector(state => state.modalReducer).taskEdit;
 
+    const tasks = useSelector(state => state.tasksReducer).tasks;
+    const grouppedTasksByColumns = {};
+
+    tasks.forEach(task => {
+        if (grouppedTasksByColumns[task.column] === undefined) grouppedTasksByColumns[task.column] = [];
+
+        grouppedTasksByColumns[task.column].push(task);
+    });
+
     columnsData.forEach(columnData => {
         if (columnData.board !== data.id) return;
 
+        const columnTasks = grouppedTasksByColumns[columnData.id];
+
         columns.push(
             <Column
-                data={columnData}
+                columnData={columnData}
+                tasks={columnTasks ?? null}
                 key={columnData.id}
                 clickHandler={id => clickHandler(id)}
             />
